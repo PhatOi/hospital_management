@@ -88,7 +88,14 @@ classDiagram
     Facility *-- Hospital
 
 ```
+## Features of this Project
 
+### Admin Users Can
+1. 
+### Healthcare Staff Can
+1. 
+### Patient Can
+1. 
 
 ## How to Install and Run this project?
 
@@ -110,52 +117,54 @@ classDiagram
 
 Install Virtual Environment First
 ```
-$  pip install virtualenv
+pip install virtualenv
 ```
 
 Create Virtual Environment
 
 For Windows
 ```
-$  python -m venv venv
+python -m venv venv
 ```
 For Mac
 ```
-$  python3 -m venv venv
+python3 -m venv venv
 ```
 For Linux
 ```
-$  virtualenv .
+virtualenv .
 ```
 
 Activate Virtual Environment
 
 For Windows
 ```
-$  source venv/scripts/activate
+source venv/scripts/activate
 ```
 
 For Mac
 ```
-$  source venv/bin/activate
+source venv/bin/activate
 ```
 
 For Linux
 ```
-$  source bin/activate
+source bin/activate
 ```
 
 **3. Clone this project**
 ```
-$  git clone [https://github.com/AsunaYuuki197/hospital-management.git]
+git clone https://github.com/AsunaYuuki197/hospital-management.git
 ```
 
 Then, Enter the project
 ```
-$  cd student-management
+cd student-management
 ```
 
 **4. Install Requirements from 'requirements.txt'**
 ```python
-$  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
+
+
