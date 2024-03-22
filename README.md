@@ -161,7 +161,7 @@ Activate Virtual Environment
 
 For Windows
 ```
-source venv/scripts/activate
+venv\Scripts\activate
 ```
 
 For Mac
