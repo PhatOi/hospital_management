@@ -119,7 +119,7 @@ classDiagram
 5. View Healthcare Staff Evaluation
 6. Send Feedback about their satisfaction to admin
 
-## How to Install and Run this project?
+## How to Install and Edit this project?
 
 ### Pre-Requisites:
 1. Install Git Version Control
@@ -189,4 +189,22 @@ cd hospital-management
 pip install -r requirements.txt
 ```
 
+**5. Edit some File, Do some Work**
+
+**6. Push to repo by this command line**
+
+Add all file changed
+```
+git add . 
+```
+
+Commit it
+```
+git commit -m "summary work you have done"
+```
+
+Push it to repo
+```
+git push
+```
 
