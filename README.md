@@ -90,12 +90,34 @@ classDiagram
 ```
 ## Features of this Project
 
-### Admin Users Can
-1. 
-### Healthcare Staff Can
-1. 
-### Patient Can
-1. 
+- ###  Admin Users Can
+1. Manage Healthcare Staff (Add, Update, and Delete)
+2. Manage Patient (Add, Update, and Delete)
+3. Manage Facilities (Add, Update, and Delete)
+4. View All Information about Patient, Healthcare Staff
+5. Divide Work for Healthcare Staff
+6. View Chart Analysis about Patient Recovery Progress, Facility Level Use, and Patient Satisfaction Level
+    Patient Recovery Progress: Percentage chart 
+    Facility Level Use: Bar chart about number of each medicine used and number of times equipment used
+    Patient Satisfaction Level: Percentage chart
+8. Review and Reply Patient/Healthcare Staff Feedback 
+- ###  Healthcare Staff Can
+1. Add/Update their Personal Information
+2. See all about their Patient and Work Duty
+3. Add/Update Patient Personal Information
+4. Add/Update Patient Medical History
+5. Add/Update Patient Test Result
+6. Evaluate Patient Progress
+7. View Patient Treatment Schedule
+8. View Available Facility
+9. Send Feedback to admin
+- ### Patient Can
+1. Add/Update their Personal Information
+2. View Medical History
+3. View Test Result
+4. View Treatment Schedule
+5. View Healthcare Staff Evaluation
+6. Send Feedback about their satisfaction to admin
 
 ## How to Install and Run this project?
 
