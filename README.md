@@ -97,9 +97,9 @@ classDiagram
 4. View All Information about Patient, Healthcare Staff
 5. Divide Work for Healthcare Staff
 6. View Chart Analysis about Patient Recovery Progress, Facility Level Use, and Patient Satisfaction Level
-    Patient Recovery Progress: Percentage chart 
-    Facility Level Use: Bar chart about number of each medicine used and number of times equipment used
-    Patient Satisfaction Level: Percentage chart
+    - Patient Recovery Progress: Percentage chart
+    - Facility Level Use: Bar chart about number of each medicine used and number of times equipment used
+    - Patient Satisfaction Level: Percentage chart
 8. Review and Reply Patient/Healthcare Staff Feedback 
 - ###  Healthcare Staff Can
 1. Add/Update their Personal Information
