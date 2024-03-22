@@ -181,7 +181,7 @@ git clone https://github.com/AsunaYuuki197/hospital-management.git
 
 Then, Enter the project
 ```
-cd student-management
+cd hospital-management
 ```
 
 **4. Install Requirements from 'requirements.txt'**
