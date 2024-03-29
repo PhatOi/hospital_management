@@ -16,17 +16,21 @@ class Admin(models.Model):
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
+    # objects = models.Manager()
+    def __str__(self):
+        return f"{self.name}"
 
 class Staff(models.Model):
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
-    Phone = models.IntegerField()
+    Phone = models.CharField(max_length=15)
     Address = models.TextField() 
     Avatar = models.FileField()
-    Role = models.CharField()
-    Certificate = models.CharField()
-    Specialize = models.CharField()
+    Role = models.CharField(max_length=15)
+    Certificate = models.CharField(max_length=255)
+    Specialize = models.JSONField(max_length=255)
     Availablle = models.BooleanField()
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
