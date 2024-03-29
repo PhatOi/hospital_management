@@ -279,3 +279,43 @@ Push it to repo
 git push
 ```
 
+**7. Resolve Conflict (repo has commits, and local has commit too)**
+
+Add all file changed
+```
+git add . 
+```
+
+Commit it
+```
+git commit -m "summary work you have done"
+```
+
+Push it to repo
+```
+git push
+```
+
+Cant push, because in repo has changes
+```
+git pull
+```
+
+If it appears tool for choose current changes or incoming change, then use it, but carefull
+```
+There has something like merge tool in file has changes conflict, you should take option accept both changes, then. 
+git add .
+git commit -m "add story"
+git pull (optional)
+git push
+```
+
+
+If it doesnt appears tool, and it looks strange, you can do this
+```
+git add .
+git commit -m "add story"
+git pull
+git push
+```
+
