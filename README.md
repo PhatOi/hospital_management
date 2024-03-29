@@ -5,58 +5,64 @@ This hospital management system is designed with the goal of not only being a to
 ```mermaid
 classDiagram
     class Patient{
+        <<Models>>
         - ID: number
         - PersonalInfo: PersonalInfo
         - MedicalHistory: Date[]
         - TestResult: TestResult
         - TreatmentSchedule: Diary
         - Progress: Progress
-        + addPersonalInfo(PersonalInfo: PersonalInfo)
+        %% + addPersonalInfo(PersonalInfo: PersonalInfo)
     }
 
     class PersonalInfo{
+        <<Models>>
         - ...
     }
 
     class TestResult{
+        <<Models>>
         - Blood:
         - ...
     }
 
-    class HealthcareStaff{
-        - Staff: Staff[]
-        + addPatientInfo(Patient: Patient)
-        + addMedicalHistory(Date: Date)
-        + addTestResult(TestResult: TestResult)
-        + addTreatmentSchedule(Diary: Diary)
-        + evaluateProgress()
-    }
+    %%class HealthcareStaff{
+        %%<<Models>>
+        %%- Staff: Staff[]
+        %% + addPatientInfo(Patient: Patient)
+        %% + addMedicalHistory(Date: Date)
+        %% + addTestResult(TestResult: TestResult)
+        %% + addTreatmentSchedule(Diary: Diary)
+        %% + evaluateProgress()
+    %%}
 
     class Staff{
+        <<Models>>
         - ID: number
         - Name: string
         - Age: number
         - Phone: number
         - Address: string
-        - Avatar: picture
+        - Avatar: linkStorage
         - Role: [Doctor, Nurse, Assistant]
         - Certificate: string
         - Specialize: string
-        - Availablle: []
+        - Availablle: bool
     }
 
 
-    class Facility{
-        - Medicine: Medicine[]
-        - MedicalEquipment: MedicalEquipment[]
-        + addMedicine(Medicine: Medicine)
-        + removeMedicine()
-        + MedicineInfo()
-        + addMedicalEquipment()
-        + MedicalEquipmentInfo()
-    }
+    %%class Facility{
+        %%- Medicine: Medicine[]
+        %%- MedicalEquipment: MedicalEquipment[]
+        %% + addMedicine(Medicine: Medicine)
+        %% + removeMedicine()
+        %% + MedicineInfo()
+        %% + addMedicalEquipment()
+        %% + MedicalEquipmentInfo()
+    %%}
 
     class Medicine{
+        <<Models>>
         - Name: string
         - Numbers: number
         - Expiry: date
@@ -65,6 +71,7 @@ classDiagram
     }
 
     class MedicalEquipment{
+        <<Models>>
         - Name: string
         - Numbers: number
         - MaintenaceHistory: date[]
@@ -72,21 +79,85 @@ classDiagram
     }
 
     class Hospital{
+        <<Models>>
         - Patient: Patient[]
-        + PatientAccess(Patient)
-        + StaffAccess(HealthcareStaff)
-        + WorkDivision(Patient, HealthcareStaff, Facility)
+        - Staff: Staff[]
+        - Medicine: Medicine[]
+        - MedicalEquipment: MedicalEquipment[]
+        %% + PatientAccess(Patient)
+        %% + StaffAccess(HealthcareStaff)
+        %% + WorkDivision(Patient, HealthcareStaff, Facility)
     }
 
-    PersonalInfo <-- Patient
-    TestResult <-- Patient
-    Staff <-- HealthcareStaff
-    Medicine <-- Facility
-    MedicalEquipment <-- Facility
-    Patient <-- Hospital
-    HealthcareStaff *-- Hospital
-    Facility *-- Hospital
 
+    class PatientView{
+        <<Views>>
+        + Home(request): HTTPResponse
+        + Edit_PersonalInfo(request): HTTPResponse
+        + View_Medical_History(request): HTTPResponse
+        + View_Test_Result(request): HTTPResponse
+        + View_Treatment_Schedule(request): HTTPResponse
+        + View_Healthcare_Staff_Evaluation(request): HTTPResponse
+        + Send_Feedback(request): HTTPResponse
+    }
+
+    class HealthcareStaffView{
+        <<Views>>
+        + Home(request): HTTPResponse 
+        + Edit_PersonalInfo(request): HTTPResponse
+        + View_patient(request): HTTPResponse
+        + Add_patient(request): HTTPResponse
+        + Edit_patient(request): HTTPResponse
+        + View_work(request): HTTPResponse
+        + Add_Patient_Medical_History(request): HTTPResponse
+        + Add_Patient_Test_Result(request): HTTPResponse
+        + Evaluate_Patient_Progress(request): HTTPResponse
+        + View_Facility(request): HTTPResponse
+        + Send_Feedback(request): HTTPResponse        
+    }
+
+    class AdminView{
+        + Home(request): HTTPResponse 
+        + Manage_Healthcare_Staff(request): HTTPResponse   
+        + Add_Healthcare_Staff(request): HTTPResponse 
+        + Edit_Healthcare_Staff(request): HTTPResponse 
+        + Del_Healthcare_Staff(request): HTTPResponse 
+        + Manage_Patient(request): HTTPResponse   
+        + Add_Patient(request): HTTPResponse 
+        + Edit_Patient(request): HTTPResponse 
+        + Del_Patient(request): HTTPResponse
+        + Manage_Facilities(request): HTTPResponse   
+        + Add_Facilities(request): HTTPResponse 
+        + Edit_Facilities(request): HTTPResponse 
+        + Del_Facilities(request): HTTPResponse        
+        + Work_Division(request): HTTPResponse
+        + Chart_Analysis(request): HTTPResponse
+        + Patient_Feedback(request): HTTPResponse
+        + Staff_Feedback(request): HTTPResponse        
+    }
+
+
+    PersonalInfo --> Patient
+    TestResult --> Patient
+    %% Staff <-- HealthcareStaff
+    %% Medicine <-- Facility
+    %% MedicalEquipment <-- Facility
+    Patient --> Hospital
+    Staff --> Hospital
+    Medicine --> Hospital
+    MedicalEquipment --> Hospital
+    %% HealthcareStaff *-- Hospital
+    %% Facility *-- Hospital
+
+    Patient --> PatientView : getByID
+    Staff --> HealthcareStaffView : getByID
+    Patient --> HealthcareStaffView : getByID
+    Medicine --> HealthcareStaffView : getAll
+    MedicalEquipment --> HealthcareStaffView : getAll
+    Staff --> AdminView : getAll
+    Patient --> AdminView : getAll
+    Medicine --> AdminView : getAll
+    MedicalEquipment --> AdminView : getAll    
 ```
 ## Features of this Project
 
