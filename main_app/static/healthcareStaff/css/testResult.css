@@ -1,0 +1,52 @@
+.box {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 80%;
+    height: 72vh;
+    border: 1px solid #000;
+    margin: 40px auto;
+}
+
+.box h2 {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.box .box_container {
+    margin-top: 100px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.box .box_container:nth-child(2) {
+    margin-left: 48px;
+    text-align: start;
+}
+
+.box .box_container:last-child {
+    margin-right: 48px;
+}
+
+.box .box_container li {
+    list-style-type: none;
+}
+
+.box_container li:first-child {
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #000;
+}
+
+.box_container li:not(:first-child) {
+    padding-left: 8px;
+}
+
+.box_container li:last-child {
+    padding-bottom: 8px;
+}
+

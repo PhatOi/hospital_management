@@ -13,6 +13,39 @@ def main(request):
     template = loader.get_template("main.html")
     return HttpResponse(template.render())    
 
+# HEALTHCARE STAFF
+def healthcareStaff__Homepage(request):
+    template = loader.get_template("HealthcareStaff/homePage.html")
+    return HttpResponse(template.render())    
+
+def healthcareStaff__Infor(request):
+    template = loader.get_template("HealthcareStaff/healthcareStaffInfor.html")
+    return HttpResponse(template.render())    
+
+def healthcareStaff__Patient(request):
+    template = loader.get_template("HealthcareStaff/patient.html")
+    return HttpResponse(template.render())   
+
+def healthcareStaff__Patient_Infor(request):
+    template = loader.get_template("HealthcareStaff/patient/infor.html")
+    return HttpResponse(template.render())   
+
+def healthcareStaff__Patient_MedicalHistory(request):
+    template = loader.get_template("HealthcareStaff/patient/medicalHistory.html")
+    return HttpResponse(template.render())   
+
+def healthcareStaff__Patient_TestResult(request):
+    template = loader.get_template("HealthcareStaff/patient/testResult.html")
+    return HttpResponse(template.render())   
+
+def healthcareStaff__Patient_Schedule(request):
+    template = loader.get_template("HealthcareStaff/patient/schedule.html")
+    return HttpResponse(template.render()) 
+  
+def healthcareStaff__Storage(request):
+    template = loader.get_template("HealthcareStaff/storage.html")
+    return HttpResponse(template.render()) 
+# HEALTHCARE STAFF
 
 
 def signup(request):
