@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.grid {
+  display: flex;
+  justify-content: right;
+  height: 0;
+}
+
+.header_navbar-list {
+  list-style: none;
+}
+
+.header_navbar-item, .header_navbar-item-link {
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 300;
+}
+
+.header_navbar-item-link {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.header_navbar-item-link:hover {
+  color: black;
+}
+
+.header {
+  background-color: #007bff;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.header_title {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+.header_navbar {
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 50px 0;
+  height: 33px;
+}
+
+.header_navbar_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header_navbar_item {
+  display: inline;
+  margin-right: 20px;
+}
+
+.header_navbar_item_link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.header_navbar_item_link:hover {
+  color: black;
+}
+
+footer {
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.title {
+  font-family:'Roboto';
+  text-transform: uppercase;
+  background-color:#0c6aaa;
+  color: #fff;
+  padding: 10px 0;
+  margin: 0;
+  font-size: larger;
+  width: 100%;
+  border-color: 10px solid black;
+  border-radius: 4px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  border-radius: 4px;
+}
+
+table, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.info {
+  width: 25%;
+  font-family: 'Roboto';
+  vertical-align:middle;
+  font-weight: 800;
+  height: auto;
+  padding-left:10px;
+  height: 30px;
+}
+
+table, .title
+{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.import {
+  width: 75%;
+  text-align: left;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.button a {
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  color: white;
+  background-color: #0c6aaa;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.button a:hover {
+  background-color: #0c6aaa;
+  color: black;
+}

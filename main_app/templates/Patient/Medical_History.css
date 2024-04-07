@@ -1,0 +1,165 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.grid {
+  display: flex;
+  justify-content: right;
+  height: 0;
+}
+
+.header_navbar-list {
+  list-style: none;
+}
+
+.header_navbar-item, .header_navbar-item-link {
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 300;
+}
+
+.header_navbar-item-link {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.header_navbar-item-link:hover {
+  color: black;
+}
+
+.header {
+  background-color: #007bff;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.header_title {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+.header_navbar {
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 50px 0;
+  height: 33px;
+}
+
+.header_navbar_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header_navbar_item {
+  display: inline;
+  margin-right: 20px;
+}
+
+.header_navbar_item_link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.header_navbar_item_link:hover {
+  color: black;
+}
+
+footer {
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  bottom: 0;
+  width: 100%;
+}
+
+
+.cent{
+  margin: 0 0 0 20px;
+}
+
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  font-size: large;
+  font-weight: 900;
+}
+
+.button {
+  margin: 20px 0;
+}
+
+.button a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  background-color: #0c6aaa;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.button a:hover {
+  background-color: #0c6aaa;
+  color: black;
+}
+
+table {
+  width: 95%;
+  margin: auto;
+}
+
+table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+  vertical-align: middle;
+  max-width: 20%;
+}
+
+label {
+  display: inline-block;
+  padding: 12px 12px 12px 0;
+}
+
+.from {
+  margin-bottom: 10px;
+}
+
+input[type=date] {
+  padding: 6px;
+  border-color: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  resize: vertical;
+}
