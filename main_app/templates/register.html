@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng nhập tài khoản | Hệ thống quản lý bệnh viện</title>
+    <title>Đăng ký tài khoản | Hệ thống quản lý bệnh viện</title>
     <link rel="stylesheet" href="auth_form.css" />
     <link
       rel="stylesheet"
@@ -18,7 +18,7 @@
         <div class="title_item title_item_app-name">
           HỆ THỐNG QUẢN LÍ BỆNH VIỆN
         </div>
-        <div class="title_item title_item_login-name">Đăng nhập</div>
+        <div class="title_item title_item_login-name">Đăng ký</div>
       </div>
     </header>
     <div class="modal">
@@ -28,11 +28,11 @@
           <div class="auth-form">
             <div class="auth-form__container">
               <div class="auth-form__header">
-                <h3 class="auth-form__heading">Đăng nhập</h3>
+                <h3 class="auth-form__heading">Đăng ký</h3>
                 <a
-                  href="http://127.0.0.1:5500/register.html"
+                  href="http://127.0.0.1:5500/login.html"
                   class="auth-form__switch-btn"
-                  >Đăng ký</a
+                  >Đăng nhập</a
                 >
               </div>
               <div class="auth-form__form">
@@ -50,16 +50,17 @@
                     placeholder="Mật khẩu của bạn"
                   />
                 </div>
+                <div class="auth-form__group">
+                  <input
+                    type="password"
+                    class="auth-form__input"
+                    placeholder="Nhập lại mật khẩu"
+                  />
+                </div>
               </div>
 
               <div class="auth-form__aside">
                 <div class="auth-form__help">
-                  <a
-                    class="auth-form__help-link auth-form__help-link-forgot"
-                    href="http://127.0.0.1:5500/forgot_password.html"
-                    >Quên mật khẩu</a
-                  >
-                  <span class="auth-form__help-separate"></span>
                   <a class="auth-form__help-link auth-form__help-link" href=""
                     >Cần trợ giúp?</a
                   >
@@ -68,11 +69,11 @@
 
               <div class="auth-form__controls">
                 <!--
-                  <button class="btn auth-form__controls-back">
+                <button class="btn auth-form__controls-back">
                   <a href="" class="auth-form__controls-back-link"> TRỞ LẠI </a>
-                  </button>
+                </button>
                 -->
-                <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                <button class="btn btn--primary">ĐĂNG KÝ</button>
               </div>
             </div>
           </div>
