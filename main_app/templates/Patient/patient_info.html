@@ -45,27 +45,31 @@
         <ul class="header_navbar_list">
           <li class="header_navbar_item">
             <a
-              href="http://127.0.0.1:5500/mainpage.html"
+              href="% url 'Patient__MainPage' %"
               class="header_navbar_item_link"
               >Trang chính</a
             >
           </li>
           <li class="header_navbar_item">
             <a
-              href="http://127.0.0.1:5500/patient_info.html"
+              href="% url 'Patient__Patient_Info' %"
               class="header_navbar_item_link"
               >Thông tin bệnh nhân</a
             >
           </li>
           <li class="header_navbar_item">
             <a
-              href="http://127.0.0.1:5500/Medical_History.html"
+              href="% url 'Patient__Medical_History' %"
               class="header_navbar_item_link"
               >Lịch sử khám bệnh</a
             >
           </li>
           <li class="header_navbar_item">
-            <a href="#" class="header_navbar_item_link">Lịch tái khám</a>
+            <a href="% url 'Patient__Re_examination' %" 
+              class="header_navbar_item_link"
+            >
+              Lịch tái khám
+            </a>
           </li>
           <!-- Thêm các liên kết khác nếu cần -->
         </ul>
