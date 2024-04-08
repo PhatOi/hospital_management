@@ -34,3 +34,39 @@ class Staff(models.Model):
     Availablle = models.BooleanField()
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+class Medicine(models.Model):
+    name = models.CharField(max_length=200)
+    numbers = models.PositiveIntegerField()
+    expiry = models.DateField()
+    input_day = models.DateField()
+    output_day = models.DateField()
+
+class MedicalEquipment(models.Model):
+    name = models.CharField(max_length=200)
+    numbers = models.PositiveIntegerField()
+    maintenance_history = models.ManyToManyField('MaintenanceEvent')
+    available = models.BooleanField(default=True)
+
+class MaintenanceEvent(models.Model):
+    date = models.DateField()
+    description = models.TextField()
+
+class Facility(models.Model):
+    medicines = models.ManyToManyField(Medicine)
+    medical_equipments = models.ManyToManyField(MedicalEquipment)
+
+    def add_medicine(self, medicine):
+        self.medicines.add(medicine)
+
+    def remove_medicine(self, medicine):
+        self.medicines.remove(medicine)
+
+    def get_medicines_info(self):
+        return self.medicines.all()
+
+    def add_medical_equipment(self, equipment):
+        self.medical_equipments.add(equipment)
+
+    def get_medical_equipments_info(self):
+        return self.medical_equipments.all()
