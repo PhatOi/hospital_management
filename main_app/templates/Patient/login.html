@@ -30,7 +30,7 @@
               <div class="auth-form__header">
                 <h3 class="auth-form__heading">Đăng nhập</h3>
                 <a
-                  href="http://127.0.0.1:5500/register.html"
+                  href="{% url 'Patient__Register' %}"
                   class="auth-form__switch-btn"
                   >Đăng ký</a
                 >
@@ -56,7 +56,7 @@
                 <div class="auth-form__help">
                   <a
                     class="auth-form__help-link auth-form__help-link-forgot"
-                    href="http://127.0.0.1:5500/forgot_password.html"
+                    href="{% url 'Patient__Forgot_password' %}"
                     >Quên mật khẩu</a
                   >
                   <span class="auth-form__help-separate"></span>
