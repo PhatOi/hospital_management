@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký tài khoản | Hệ thống quản lý bệnh viện</title>
+    <link rel="stylesheet" href="% static 'css/auth_form.css' %" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="title">
+        <div class="title_item title_item_app-name">
+          HỆ THỐNG QUẢN LÍ BỆNH VIỆN
+        </div>
+        <div class="title_item title_item_login-name">Đăng ký</div>
+      </div>
+    </header>
+    <div class="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__body">
+        <div class="modal__inner">
+          <div class="auth-form">
+            <div class="auth-form__container">
+              <div class="auth-form__header">
+                <h3 class="auth-form__heading">Đăng ký</h3>
+                <a
+                  href="http://127.0.0.1:5500/login.html"
+                  class="auth-form__switch-btn"
+                  >Đăng nhập</a
+                >
+              </div>
+              <div class="auth-form__form">
+                <div class="auth-form__group">
+                  <input
+                    type="text"
+                    class="auth-form__input"
+                    placeholder="Email của bạn"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="password"
+                    class="auth-form__input"
+                    placeholder="Mật khẩu của bạn"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="password"
+                    class="auth-form__input"
+                    placeholder="Nhập lại mật khẩu"
+                  />
+                </div>
+              </div>
+
+              <div class="auth-form__aside">
+                <div class="auth-form__help">
+                  <a class="auth-form__help-link auth-form__help-link" href=""
+                    >Cần trợ giúp?</a
+                  >
+                </div>
+              </div>
+
+              <div class="auth-form__controls">
+                <!--
+                <button class="btn auth-form__controls-back">
+                  <a href="" class="auth-form__controls-back-link"> TRỞ LẠI </a>
+                </button>
+                -->
+                <button class="btn btn--primary">ĐĂNG KÝ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer></footer>
+  </body>
+</html>

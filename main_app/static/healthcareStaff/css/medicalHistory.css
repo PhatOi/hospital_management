@@ -1,0 +1,83 @@
+.box {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    height: 72vh;
+    border: 1px solid #000;
+    margin: 40px auto;
+}
+
+.box h2 {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.box .box__infor {
+    max-width: 45%;
+    list-style-type: decimal;
+}
+
+.box .box__infor li input {
+    padding: 6px 12px;
+    margin: 8px 0px;
+    background-color: #fff;
+    border: none;
+    outline: 1px solid #fff;
+}
+
+.box .box__avt {
+    width: 300px;
+    height: 400px;
+    margin-bottom: 170px;
+    border-radius: 50px;
+    border: 1px solid #000;
+    background: url('../img/patient.jpg') top center / cover no-repeat;
+}
+
+.bttn_container .bttn {
+    display: inline-block;
+    position: absolute;
+    min-width: 150px;
+    padding: 8px 12px;
+    text-align: center;
+    border-radius: 30px;
+    transition: .3s;
+    animation: fade-in .5s ease;
+}
+
+.bttn_container .bttn--fixed {
+    background-color: #F9C719;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bttn_container .bttn--complete {
+    background-color: #14F245;
+    left: 46%;
+    transform: translate(-50%, -50%);
+}
+
+.bttn_container .bttn--exit {
+    background-color: #F24B4B;
+    left: 54%;
+    transform: translate(-50%, -50%);
+}
+
+.bttn_container .bttn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

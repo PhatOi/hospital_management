@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chính - Quản Lý Bệnh Viện</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthcareStaff/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'healthcareStaff/css/healthcareStaff.css' %}">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <style>
+        nav .personal_infor {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hệ Thống Quản Lý Bệnh Viện</h1>
+
+        <nav>
+            <ul>
+                <li class="home"><a href="{% url 'healthcareStaff__Homepage' %}">Trang Chính</a></li>
+                <li class="personal_infor"><a href="#" class="white-text">Thông tin cá nhân</a></li>
+                <li class="patient_infor"><a href="{% url 'healthcareStaff__Patient' %}">Bệnh nhân phụ trách</a>
+                    
+                    <ul class="subnav">
+                        <li><a href="{% url 'healthcareStaff__Patient_Infor' %}">Thông tin bệnh nhân</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_MedicalHistory' %}">Lịch sử bệnh án</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_TestResult' %}">Kết quả xét nghiệm tổng quát</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_Schedule' %}">Lịch trình khám bệnh</a></li>
+                    </ul>
+
+                </li>
+                <li class="storage"><a href="{% url 'healthcareStaff__Storage' %}">Kho dụng cụ</a></li>
+                <!-- Thêm các liên kết khác nếu cần -->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="box">
+        <ul class="box__infor">
+            <li>Họ và tên: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Ngày tháng năm sinh: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Giới tính: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Hộ khẩu thường trú: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Điện thoại liên hệ<input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Dân tộc: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Số CCCD: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Trình độ văn hóa: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Trình độ học vấn: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Trình độ chuyên môn: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Chuyên ngành: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+            <li>Bệnh nhân đang theo dõi: <input disabled placeholder="Nguyễn Văn A" type="text"></li>
+        </ul>
+
+        <div class="box__avt">
+            
+        </div>
+
+        
+    </div>
+
+    <div class="bttn_container">
+        <div class="bttn bttn--fixed">
+            Chỉnh sửa
+        </div>
+        
+        <div class="bttn bttn--complete display-none">
+            Hoàn thành
+        </div>
+
+        <div class="bttn bttn--exit display-none">
+            Hủy
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hệ Thống Quản Lý Bệnh Viện</p>
+    </footer>
+</body>
+
+<script src="{% static 'healthcareStaff/js/healthcareStaff.js' %}"></script>
+</html>

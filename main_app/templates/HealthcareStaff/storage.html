@@ -1,0 +1,263 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chính - Quản Lý Bệnh Viện</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthcareStaff/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'healthcareStaff/css/storage.css' %}">
+    <style>
+        nav .storage {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hệ Thống Quản Lý Bệnh Viện</h1>
+
+        <nav>
+            <ul>
+                <li class="home"><a href="{% url 'healthcareStaff__Homepage' %}">Trang Chính</a></li>
+                <li class="personal_infor"><a href="{% url 'healthcareStaff__Infor' %}">Thông tin cá nhân</a></li>
+                <li class="patient_infor"><a href="{% url 'healthcareStaff__Patient' %}">Bệnh nhân phụ trách</a>
+                    
+                    <ul class="subnav">
+                        <li><a href="{% url 'healthcareStaff__Patient_Infor' %}">Thông tin bệnh nhân</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_MedicalHistory' %}">Lịch sử bệnh án</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_TestResult' %}">Kết quả xét nghiệm tổng quát</a></li>
+                        <li><a href="{% url 'healthcareStaff__Patient_Schedule' %}">Lịch trình khám bệnh</a></li>
+                    </ul>
+
+                </li>
+                <li class="storage"><a href="#" class="white-text">Kho dụng cụ</a></li>
+                <!-- Thêm các liên kết khác nếu cần -->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="box">
+        <div class="box__container flex-1">
+            <h2>THUỐC</h2>
+            <ul>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+                <li>
+                    Tên: 
+                    <br>
+                    Số lượng:
+                    <br>
+                    HSD:
+                </li>
+            </ul>
+        </div>
+        <div class="box__container flex-1">
+            <h2>TRANG THIẾT BỊ</h2>
+            <div class="list">
+                <ul class="flex-1">
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                    <li>
+                        Tên: 
+                        <br>
+                        Số lượng:
+                        <br>
+                        HSD:
+                    </li>
+                </ul>
+                <ul class="flex-1">
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                    <li>
+                        <br>
+                        Sẵn có:
+                        <br>
+                        <br>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hệ Thống Quản Lý Bệnh Viện</p>
+    </footer>
+</body>
+</html>

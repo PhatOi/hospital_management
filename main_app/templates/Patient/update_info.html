@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cập nhật hồ sơ | Hệ thống quản lý bệnh viện</title>
+    <link rel="stylesheet" href="% static 'css/mainpage.css' %" />
+    <link rel="stylesheet" href="% static 'css/update_info.css' %" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="grid">
+        <nav class="header_navbar">
+          <ul class="header_navbar-list">
+            <li class="header_navbar-item">
+              <a href="" class="header_navbar-item-link">Hỗ trợ</a>
+            </li>
+            <li class="header_navbar-item header_navbar-user">
+              <img
+                src="https://th.bing.com/th/id/OIP.qYpLr_Lt2DfgWMtOvbIhWwHaEK?w=319&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7"
+                alt="Avatar của bạn"
+                class="header__navbar-user-img"
+              />
+              <span class="header__navbar-user-name">Phát Ơi</span>
+
+              <ul class="header__navbar-user-menu">
+                <li class="header__navbar-user-item">
+                  <a href="">Đăng xuất</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="top">
+        <h1 class="header_title">Hệ Thống Quản Lý Bệnh Viện</h1>
+      </div>
+      <nav class="header_navbar">
+        <ul class="header_navbar_list">
+          <li class="header_navbar_item">
+            <a
+              href="% url 'Patient__MainPage' %"
+              class="header_navbar_item_link"
+              >Trang chính</a
+            >
+          </li>
+          <li class="header_navbar_item">
+            <a
+              href="% url 'Patient__Patient_Info' %"
+              class="header_navbar_item_link"
+              >Thông tin bệnh nhân</a
+            >
+          </li>
+          <li class="header_navbar_item">
+            <a
+              href="% url 'Patient__Medical_History' %"
+              class="header_navbar_item_link"
+              >Lịch sử khám bệnh</a
+            >
+          </li>
+          <li class="header_navbar_item">
+            <a href="% url 'Patient__Re_examination' %" 
+              class="header_navbar_item_link"
+            >
+              Lịch tái khám
+            </a>
+          </li>
+          <!-- Thêm các liên kết khác nếu cần -->
+        </ul>
+      </nav>
+    </header>
+
+    <div class="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__body">
+        <div class="modal__inner">
+          <div class="auth-form">
+            <div class="auth-form__container">
+              <div class="auth-form__header">
+                <h3 class="auth-form__heading">Cập nhật hồ sơ</h3>
+              </div>
+              <div class="auth-form__form">
+                <div class="auth-form__group">
+                  <input
+                    type="text"
+                    class="auth-form__input"
+                    placeholder="Email của bạn"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="text"
+                    class="auth-form__input"
+                    placeholder="Họ và tên"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="text"
+                    class="auth-form__input"
+                    placeholder="Số điện thoại"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="text"
+                    class="auth-form__input"
+                    placeholder="Địa chỉ"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="date"
+                    class="auth-form__input"
+                    placeholder="Ngày tháng năm sinh"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <input
+                    type="password"
+                    class="auth-form__input"
+                    placeholder="Mật khẩu của bạn"
+                  />
+                </div>
+                <div class="auth-form__group">
+                  <select name="gender" id="gender" class="auth-form__input">
+                    <option value="Male" class="auth-form__select">Nam</option>
+                    <option value="Female" class="auth-form__select">Nữ</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="auth-form__controls">
+                <button class="btn auth-form__controls-back">
+                  <a
+                    href="http://127.0.0.1:5500/patient_info.html"
+                    class="auth-form__controls-back-link"
+                  >
+                    TRỞ LẠI
+                  </a>
+                </button>
+                <button class="btn btn--primary">CẬP NHẬT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 Hệ Thống Quản Lý Bệnh Viện</p>
+    </footer>
+  </body>
+</html>
