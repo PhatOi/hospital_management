@@ -1,50 +1,37 @@
 from django.shortcuts import render, redirect
-from .forms import PatientForm, PersonalInfoForm 
+from .forms import PatientForm, PersonalInfoForm, RegisterForm 
 from django.contrib.auth.models import User 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout 
-from django.contrib.auth.forms import UserCreationForm
-
-def loginPage(request):
-    page = 'login'
-    if request.user.is_authenticated:
-        return redirect('homepage')
-    
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        try:
-            user = User.objects.get(username = username)
-        except:
-            messages.error(request, 'User does not exist')
-            
-        authenticated_user = authenticate(request, username=username, password=password)
-        if authenticated_user is not None: 
-            login(request, authenticated_user)
-            return redirect('homepage')
-        else: 
-             messages.error(request, 'Username or password does not exist!')
-    context = {'page': page}
-    return render (request, 'login_register.html', context)
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
-def logoutUser(request):
-    logout(request) 
-    return redirect('login')
-
-def registerUser(request):
-    form = UserCreationForm()
+def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save( commit = False)
-            user.save()
+            user = form.save()
             login(request, user)
-            return redirect ('homepage')
-        else:
-            messages.error(request, 'An error occur!')
-    context= {'form': form}
-    return render(request, 'login_register.html', context)
+            return redirect('homepage')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('homepage')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+        logout(request)
+        return redirect('login')
+
 
 
 def patient_create (request):

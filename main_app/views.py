@@ -11,8 +11,7 @@ from .forms import SignUpForm, UserLoginForm
 from .models import Facility, Medicine, MedicalEquipment
 
 def main(request):
-    template = loader.get_template("main.html")
-    return HttpResponse(template.render())    
+    return render(request, 'main.html')  
 
 # HEALTHCARE STAFF
 def healthcareStaff__Homepage(request):

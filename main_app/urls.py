@@ -32,4 +32,5 @@ urlpatterns = [
     path('Patient/forgot_password', views.Patient__Forgot_password, name='Patient__Forgot_password'),
     path('Patient/reset_password', views.Patient__Reset_password, name='Patient__Reset_password'),
     # PATIENT
+    
 ]

@@ -19,5 +19,6 @@ class Patient (models.Model):
     personal_info = models.ForeignKey(PersonalInfo, on_delete=models.CASCADE)
     test_result = models.ForeignKey(TestResult, on_delete=models.CASCADE)
     
-
+        
+ 
 # Create your models here.

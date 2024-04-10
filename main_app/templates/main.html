@@ -97,24 +97,25 @@
     <header>
         <h1>Hệ Thống Quản Lý Bệnh Viện</h1>
     </header>
-
-
-
     <nav>
         <ul>
             <li><a href="#">Danh Sách Bệnh Nhân</a></li>
             <li><a href="#">Danh Sách Lịch Hẹn</a></li>
-            {% if request.user.is_authenticated %}
-                <p> Hello {{ request.user }}</p>
-                <li><a href="{% url 'logout' %}">Đăng Xuất</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Đăng xuất</a></li>    
             {% else %}
-                <li><a href = "{% url 'login' %}">Đăng Nhập</a> </li>
+                <li><a href="{% url 'login' %}">Đăng Nhập</a></li>    
             {% endif %}
-            <li><a href = '{% url 'register' %}'> Đăng ký</a></li>
+            <li><a href="{% url 'register' %}"> Đăng ký</a></li>
             <!-- Thêm các liên kết khác nếu cần -->
         </ul>
     </nav>
+
+    {%if user.is_authenticated %}
+        <h4> Hi {{request.user}} </h4>
+    {% endif %}
     {%block content%}
+
     {%endblock%}
     <footer>
         <p>&copy; 2024 Hệ Thống Quản Lý Bệnh Viện</p>
