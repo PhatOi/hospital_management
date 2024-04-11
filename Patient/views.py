@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
-from .forms import PatientForm, PersonalInfoForm, RegisterForm 
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import PatientProfileForm, RegisterForm 
 from django.contrib.auth.models import User 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from . models import Profile
+from django.contrib.auth.decorators import login_required 
+from django.http import HttpResponse
 
 
 def register_view(request):
@@ -34,24 +37,59 @@ def logout_view(request):
 
 
 
-def patient_create (request):
-    if request.method == 'POST':
-        form = PatientForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('homepage')  # Điều hướng đến trang thành công sau khi lưu form
+@login_required
+def create_profile(request):
+    if Profile.objects.filter(user=request.user).exists():
+        # Nếu đã có, chuyển hướng đến trang chỉnh sửa hoặc xóa hồ sơ cũ
+        return HttpResponse('Bạn đã tạo hồ sơ trước đó')
     else:
-        form = PatientForm()
-    return render(request, 'create_patient.html', {'form': form})
-
-def person (request):
+        # Nếu chưa, hiển thị form tạo hồ sơ mới
+        if request.method == 'POST':
+            form = PatientProfileForm(request.POST)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                return redirect('homepage')
+        else:
+            form = PatientProfileForm()
+        return render(request, 'create_profile.html', {'form': form})
+    '''
     if request.method == 'POST':
-        form = PersonalInfoForm(request.POST)
+        form = PatientProfileForm(request.POST)
         if form.is_valid():
-            form.save()
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect('homepage')
     else:
-        form = PersonalInfoForm() 
-    return render(request, 'person.html', {'form': form})
+        form = PatientProfileForm()
+    return render(request, 'create_profile.html', {'form': form})
+'''
 
+@login_required
+def view_profile(request):
+    try:
+        profile = Profile.objects.get(user=request.user)
+        return render(request, 'view_profile.html', {'profile': profile})
+    except Profile.DoesNotExist:
+        messages.error(request, 'Bạn chưa điền thông tin')
+        return HttpResponse('Bạn chưa điền thông tin')
+        
+#def view_profile(request, pk):
+ #   profile = get_object_or_404(Profile, id = pk)
+  #  return render(request, 'view_profile.html', {'profile': profile})
 # Create your views here.
+
+@login_required
+
+def edit_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = PatientProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+    else:
+        form = PatientProfileForm(instance=profile)
+    return render(request, 'edit_profile.html', {'form': form})
