@@ -112,7 +112,7 @@ def remove_medicine(request, medicine_name):
         medicine_numbers = int(request.POST.get('medicine_numbers'))
         try:
             medicine = Medicine.objects.get(name=medicine_name)
-            if medicine.numbers >= medicine_numbers:
+            if medicine.numbers > medicine_numbers:
                 medicine.numbers -= medicine_numbers
                 medicine.save()
                 MedicineHistory.objects.create(name=medicine.name, numbers=medicine.numbers, changeType='export')
