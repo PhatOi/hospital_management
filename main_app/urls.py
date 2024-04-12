@@ -35,48 +35,44 @@ urlpatterns = [
 
 
     ########################## new url #######################################
-    '''
-    path('main', views.main, name='HomePage'),
-    path('', views.LoginPage, name='LoginPage'),
-    path('doLogin', views.doLogin, name='doLogin'),
-    path('get_user_detail', views.getUserDetails, name='getUserDetails'),
-    path('logout_user', views.logout_user, name='logout'),
+    # path('main', views.main, name='HomePage'),
+    # path('', views.LoginPage, name='LoginPage'),
+    # path('doLogin', views.doLogin, name='doLogin'),
+    # path('get_user_detail', views.getUserDetails, name='getUserDetails'),
+    # path('logout_user', views.logout_user, name='logout'),
 
-    # admin
-    path('admin_home', admin_views.admin_home, name = 'adminhome'),
-    path('add_staff', admin_views.add_staff, name='addStaff'),
-    path('manage_staff', admin_views.manage_staff, name="manageAllStaff"),
-    path('add_patient', admin_views.add_patient, name='addPatient'),
-    path('manage_patient', admin_views.manage_patient, name="manageAllPatient"),
-    path('add_medicine', admin_views.add_medicine, name='add-medicine'),
-    path('manage_medicine', admin_views.manage_medicine, name="manageMedicine"),
-    path('add_medical_equipment', admin_views.add_medical_equipment, name='add-medical-equipment'),
-    path('manage_equip', admin_views.manage_equip, name="manageEquip"),
-    path('staff_feedback', admin_views.staff_feedback, name="staffAllFeedback"),
-    path('patient_feedback', admin_views.patient_feedback, name="patientAllFeedback"),
-    path('works', admin_views.work_schedules, name="workSchedules"),
+    # # admin
+    # path('admin_home', admin_views.admin_home, name = 'adminhome'),
+    # path('add_staff', admin_views.add_staff, name='addStaff'),
+    # path('manage_staff', admin_views.manage_staff, name="manageAllStaff"),
+    # path('add_patient', admin_views.add_patient, name='addPatient'),
+    # path('manage_patient', admin_views.manage_patient, name="manageAllPatient"),
+    # path('add_medicine', admin_views.add_medicine, name='add-medicine'),
+    # path('manage_medicine', admin_views.manage_medicine, name="manageMedicine"),
+    # path('add_medical_equipment', admin_views.add_medical_equipment, name='add-medical-equipment'),
+    # path('manage_equip', admin_views.manage_equip, name="manageEquip"),
+    # path('staff_feedback', admin_views.staff_feedback, name="staffAllFeedback"),
+    # path('patient_feedback', admin_views.patient_feedback, name="patientAllFeedback"),
+    # path('works', admin_views.work_schedules, name="workSchedules"),
 
-    # healthcare staff
-    path('staff/staff_home', healthcareStaff_views.staff_home, name="staffhome"),
-    path('staff/manage_staff/<int:staff_id>', healthcareStaff_views.manage_staff, name="manageStaff"),
-    path('staff/add_patient', healthcareStaff_views.add_patient, name='addPatient'),
-    path('staff/add_patient_save', healthcareStaff_views.add_patient_save, name='savePatient'),
-    path('staff/manage_patient', healthcareStaff_views.manage_patient, name="manageAllPatient"),
-    path('staff/add_medicine', healthcareStaff_views.add_medicine, name='add-medicine'),
-    path('staff/manage_medicine', healthcareStaff_views.manage_medicine, name="manageMedicine"),
-    path('staff/add_medical_equipment', healthcareStaff_views.add_medical_equipment, name='add-medical-equipment'),
-    path('staff/manage_equip', healthcareStaff_views.manage_equip, name="manageEquip"),
-    path('staff/staff_feedback/<int:staff_id>', healthcareStaff_views.staff_feedback, name="staffFeedback"),
-    path('staff/patient_feedback', healthcareStaff_views.patient_feedback, name="patientAllFeedback"),
-    path('staff/staff_calendar/<int:staff_id>', healthcareStaff_views.staff_calendar, name="staffCalendar"),
+    # # healthcare staff
+    # path('staff/staff_home', healthcareStaff_views.staff_home, name="staffhome"),
+    # path('staff/manage_staff/<int:staff_id>', healthcareStaff_views.manage_staff, name="manageStaff"),
+    # path('staff/add_patient', healthcareStaff_views.add_patient, name='addPatient'),
+    # path('staff/add_patient_save', healthcareStaff_views.add_patient_save, name='savePatient'),
+    # path('staff/manage_patient', healthcareStaff_views.manage_patient, name="manageAllPatient"),
+    # path('staff/add_medicine', healthcareStaff_views.add_medicine, name='add-medicine'),
+    # path('staff/manage_medicine', healthcareStaff_views.manage_medicine, name="manageMedicine"),
+    # path('staff/add_medical_equipment', healthcareStaff_views.add_medical_equipment, name='add-medical-equipment'),
+    # path('staff/manage_equip', healthcareStaff_views.manage_equip, name="manageEquip"),
+    # path('staff/staff_feedback/<int:staff_id>', healthcareStaff_views.staff_feedback, name="staffFeedback"),
+    # path('staff/patient_feedback', healthcareStaff_views.patient_feedback, name="patientAllFeedback"),
+    # path('staff/staff_calendar/<int:staff_id>', healthcareStaff_views.staff_calendar, name="staffCalendar"),
 
-
-    # Patient
-    path('patient/patient_home', patient_views.patient_home, name="patienthome"),
-    path('patient/manage_patient/<int:patient_id>', patient_views.manage_patient, name="managePatient"),
-    path('patient/patient_feedback/<int:patient_id>', patient_views.patient_feedback, name="patientFeedback"),
-    path('patient/patient_calendar/<int:patient_id>', patient_views.patient_calendar, name="patientCalendar"),
-    '''
-
-
+    # # Patient
+    # path('patient/patient_home', patient_views.patient_home, name="patienthome"),
+    # path('patient/manage_patient/<int:patient_id>', patient_views.manage_patient, name="managePatient"),
+    # path('patient/patient_feedback/<int:patient_id>', patient_views.patient_feedback, name="patientFeedback"),
+    # path('patient/patient_calendar/<int:patient_id>', patient_views.patient_calendar, name="patientCalendar"),
+  
 ]
