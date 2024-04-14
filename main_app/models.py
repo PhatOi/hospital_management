@@ -81,3 +81,6 @@ class Facility(models.Model):
     
     def edit_medical_equipment(self, equipment):
         pass
+    
+    def medicine_history(self)
+        pass

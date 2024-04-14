@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, UserLoginForm
-from .models import Facility, Medicine, MedicalEquipment
+from .models import Facility, Medicine, MedicalEquipment, MedicineHistory
 
 def main(request):
     return render(request, 'main.html')  
@@ -228,3 +228,7 @@ def edit_medical_equipment(request):
             return render(request, 'error.html', {'message': f"Không tìm thấy thiết bị y tế có tên {equipment_name}."})
     else:
         return render(request, 'edit_medical_equipment.html')
+
+def medicine_history(request):
+    history = MedicineHistory.objects.all().order_by('-date')
+    return render(request, 'medicine_history.html', {'history': history})
