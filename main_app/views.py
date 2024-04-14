@@ -92,6 +92,9 @@ def add_medicine(request):
         medicine_numbers = int(request.POST.get('medicine_numbers'))
         medicine_expiry = request.POST.get('medicine_expiry')
         facility = Facility.objects.first()  # Lấy Facility (cần chỉnh sửa nếu có nhiều Facility)
+        if facility == None: 
+            facility = Facility.objects.create()
+
         try:
             medicine = Medicine.objects.get(name=medicine_name)
             medicine.numbers += medicine_numbers
@@ -131,6 +134,8 @@ def remove_medicine(request, medicine_name):
 
 def medicine_info(request):
     facility = Facility.objects.first()  # Lấy Facility (cần chỉnh sửa nếu có nhiều Facility)
+    if facility == None: 
+        facility = Facility.objects.create()    
     medicines = facility.get_medicines_info()
     return render(request, 'medicine_info.html', {'medicines': medicines})
 
@@ -139,6 +144,9 @@ def add_medical_equipment(request):
         equipment_name = request.POST.get('equipment_name')
         equipment_numbers = int(request.POST.get('equipment_numbers'))
         facility = Facility.objects.first()  # Lấy Facility (cần chỉnh sửa nếu có nhiều Facility)
+        if facility == None: 
+            facility = Facility.objects.create()
+
         try:
             equipment = MedicalEquipment.objects.get(name=equipment_name)
             equipment.numbers += equipment_numbers
@@ -174,6 +182,9 @@ def remove_medical_equipment(request):
 
 def medical_equipment_info(request):
     facility = Facility.objects.first()  # Lấy Facility (cần chỉnh sửa nếu có nhiều Facility)
+    if facility == None: 
+        facility = Facility.objects.create()
+
     equipment = facility.get_medical_equipments_info()
     return render(request, 'medical_equipment_info.html', {'equipment': equipment})
 
