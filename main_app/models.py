@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -82,5 +83,5 @@ class Facility(models.Model):
     def edit_medical_equipment(self, equipment):
         pass
     
-    def medicine_history(self)
+    def medicine_history(self):
         pass
