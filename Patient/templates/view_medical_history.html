@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1> Lịch sử bệnh án </h1>
+{% for medical_date in medical_dates %}
+<p>Thời gian: {{ medical_date.date }} </p>
+<p> {{medical_date.description}}</p>
+<hr>
+{% endfor %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Profile
+from .models import Profile, Feedback
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
 
@@ -15,7 +15,7 @@ class RegisterForm(UserCreationForm):
 class PatientProfileForm(forms.ModelForm):
     class Meta:
         model = Profile 
-        fields = ['user','full_name', 'phone_number', 'nationality', 'gender', 'date_of_birth', 'address', 'ID1', 'name2', 'phone_number2', 'address2', 'ID2', 'relationship', 'avatar']
+        fields = ['full_name', 'phone_number', 'nationality', 'gender', 'date_of_birth', 'address', 'ID1', 'name2', 'phone_number2', 'address2', 'ID2', 'relationship', 'avatar']
         labels = {
             'full_name': 'Họ và tên',
             'phone_number': 'Số điện thoại',
@@ -33,3 +33,11 @@ class PatientProfileForm(forms.ModelForm):
             
         }
     
+class FeedbackForm (forms.ModelForm):
+    class Meta:
+        model = Feedback 
+        fields = ['description', 'rating']
+        labels = {
+            'description': 'Hãy cho chúng tôi biết cảm nhận của bạn',
+            'rating': 'Chấm điểm từ 1 tới 5 cho trải nghiệm của quý khách tại đây',
+        }

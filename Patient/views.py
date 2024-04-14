@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PatientProfileForm, RegisterForm 
+from .forms import PatientProfileForm, RegisterForm, FeedbackForm 
 from django.contrib.auth.models import User 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from . models import Profile
+from . models import Profile, Feedback, MedicalDate  
 from django.contrib.auth.decorators import login_required 
 from django.http import HttpResponse
 
@@ -22,15 +22,16 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('homepage')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login_user.html', {'form': form})
 
+@login_required 
 def logout_view(request):
         logout(request)
         return redirect('login')
@@ -93,3 +94,25 @@ def edit_profile(request):
     else:
         form = PatientProfileForm(instance=profile)
     return render(request, 'edit_profile.html', {'form': form})
+
+@login_required 
+def send_feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.feedback = request.user
+            feedback.save()
+            return redirect('homepage')
+    else:
+        form = FeedbackForm()
+    return render(request, 'send_feedback.html', {'form': form})
+
+def view_feedback(request):
+    feedbacks = Feedback.objects.all()
+    return render (request, 'view_feedback.html', {'feedbacks': feedbacks})
+
+@login_required
+def medical_history(request):
+    medical_dates = MedicalDate.objects.filter(patient = request.user)
+    return render(request, 'view_medical_history.html', {'medical_dates' : medical_dates})
