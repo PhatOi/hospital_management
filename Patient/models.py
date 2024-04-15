@@ -11,6 +11,7 @@ class Profile (models.Model):
     date_of_birth = models.DateField()
     address = models.CharField (max_length = 100)
     ID1 = models.CharField(max_length = 30)
+    medical_record = models.TextField() # Tiền sử bệnh lý của bệnh nhân
     #avatar = models.ImageField(upload_to='profile_pics/')
     #Người giám hộ
     name2 = models.CharField(max_length = 100) 
@@ -29,8 +30,7 @@ class Feedback (models.Model):
     time = models.DateTimeField(default=timezone.now)
     RATING_CHOICES = [(i, i) for i in range(1, 6)]  # Danh sách chứa tuples từ 1 đến 
     rating = models.IntegerField(choices=RATING_CHOICES) 
-    def __str__(self):
-        return self.full_name
+
     
     
 class TestResult (models.Model):
@@ -46,5 +46,16 @@ class TestResult (models.Model):
 class MedicalDate (models.Model):
     patient = models.ForeignKey(User, on_delete = models.CASCADE)
     date = models.DateField()
-    description = models.TextField()
+    diagnosis = models.TextField() # Chẩn đoán của bác sĩ
+    prescription = models.TextField() # Toa thuốc cần dùng
+    progress_option = [
+        ('Đang tiếp nhận', 'Đang tiếp nhận'),
+        ('Đang chẩn đoán', 'Đang chẩn đoán'),
+        ('Đang điều trị', 'Đang điều trị'),
+        ('Xuất viện', 'Xuất viện')
+    ]
+    progress = models.CharField(max_length = 20, choices = progress_option)
+    medical_department = models.CharField(max_length = 100)
+    def __str__(self):
+        return f"{self.patient.username}- {self.date}"
 # Create your models here.

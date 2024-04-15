@@ -1,9 +1,15 @@
 {% extends 'main.html' %}
+
 {% block content %}
+
 <h1> Lịch sử bệnh án </h1>
 {% for medical_date in medical_dates %}
-<p>Thời gian: {{ medical_date.date }} </p>
-<p> {{medical_date.description}}</p>
+<p>Ngày: {{ medical_date.date }} </p>
+<p> Chẩn đoán: {{medical_date.diagnosis}} </p>
+<p> Đơn thuốc: {{medical_date.prescription}} </p>
+<p> Tình trạng: {{medical_date.progress}} </p>
+<p> Khoa điều trị: {{medical_date.medical_department}} </p>
 <hr>
 {% endfor %}
+
 {% endblock %}

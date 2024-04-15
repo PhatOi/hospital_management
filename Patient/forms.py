@@ -15,7 +15,7 @@ class RegisterForm(UserCreationForm):
 class PatientProfileForm(forms.ModelForm):
     class Meta:
         model = Profile 
-        fields = ['full_name', 'phone_number', 'nationality', 'gender', 'date_of_birth', 'address', 'ID1', 'name2', 'phone_number2', 'address2', 'ID2', 'relationship', 'avatar']
+        fields = ['full_name', 'phone_number', 'nationality', 'gender', 'date_of_birth', 'address', 'medical_record', 'ID1', 'name2', 'phone_number2', 'address2', 'ID2', 'relationship', 'avatar']
         labels = {
             'full_name': 'Họ và tên',
             'phone_number': 'Số điện thoại',
@@ -24,6 +24,7 @@ class PatientProfileForm(forms.ModelForm):
             'date_of_birth': 'Ngày sinh',
             'address': 'Địa chỉ',
             'ID1': 'Căn cước công dân/chứng minh nhân dân',
+            'medical_record': 'Tiền sử bệnh lý của bệnh nhân',
             'avatar': 'Ảnh đại diện',
             'name2': 'Tên người thân',
             'phone_number2': 'Số điện thoại người thân',
