@@ -42,6 +42,8 @@ class TestResult (models.Model):
     blood_test = models.CharField(max_length = 100)
     urinalysis = models.CharField(max_length = 100)
     conclusion = models.TextField()
+    def __str__(self):
+        return f"Kết quả xét nghiệm của {self.patient.username}"
     
 class MedicalDate (models.Model):
     patient = models.ForeignKey(User, on_delete = models.CASCADE)

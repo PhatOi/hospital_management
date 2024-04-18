@@ -4,20 +4,20 @@ from django.contrib.auth.models import User
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from . models import Profile, Feedback, MedicalDate  
+from . models import Profile, Feedback, MedicalDate, TestResult
 from django.contrib.auth.decorators import login_required 
 from django.http import HttpResponse
 
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('homepage')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'register.html', {'form': form})
 
 def login_view(request):
@@ -83,7 +83,6 @@ def view_profile(request):
 # Create your views here.
 
 @login_required
-
 def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
@@ -101,7 +100,7 @@ def send_feedback(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             feedback = form.save(commit=False)
-            feedback.feedback = request.user
+            feedback.user = request.user
             feedback.save()
             return redirect('homepage')
     else:
@@ -116,3 +115,8 @@ def view_feedback(request):
 def medical_history(request):
     medical_dates = MedicalDate.objects.filter(patient = request.user)
     return render(request, 'view_medical_history.html', {'medical_dates' : medical_dates})
+
+@login_required 
+def view_testResult(request):
+    test_result = TestResult.objects.get(patient = request.user)
+    return render(request, 'view_testResult.html', {'test_result': test_result})

@@ -12,4 +12,5 @@ urlpatterns = [
     path('send_feedback/', views.send_feedback, name = 'send_feedback'),
     path('view_feedback/', views.view_feedback, name = 'view_feedback'),
     path('view_medical_date/', views.medical_history, name = 'medical_history'),
+    path('view_testResult', views.view_testResult, name = 'test_result'),
 ]

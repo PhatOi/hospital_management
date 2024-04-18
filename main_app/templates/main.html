@@ -112,7 +112,6 @@
     </nav>
 
     {%if user.is_authenticated %}
-        <h4> Hi {{request.user}} </h4>
         <a href="{% url 'view_profile' %}">Xem hồ sơ cá nhân của bạn</a>
         <a href="{% url 'create_profile'  %}">Tạo hồ sơ cá nhân </a>
     {% endif %}
@@ -122,9 +121,7 @@
     {%block content%}
 
     {%endblock%}
-    <footer>
-        <p>&copy; 2024 Hệ Thống Quản Lý Bệnh Viện</p>
-    </footer>
+  
 
     {% if messages %}
     <ul class="messages">

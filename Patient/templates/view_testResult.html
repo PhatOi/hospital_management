@@ -1,0 +1,18 @@
+{% extends 'main.html'%}
+
+{% block content %}
+<h1> Kết quả xét nghiệm </h1>
+<hr> 
+{% if test_result %}
+<p> Chiều cao: {{test_result.height}} </p> 
+<p> Cân nặng: {{test_result.weight}} </p> 
+<p> Huyết áp: {{test_result.blood_pressure}} </p> 
+<p> Nhịp tim: {{test_result.heart_rate}} </p> 
+<p> Xét nghiệm máu: {{test_result.blood_test}} </p> 
+<p> Xét nghiệm nước tiểu: {{test_result.urinalysis}} </p> 
+<p> Kết luận: {{test_result.conclusion}} </p> 
+{% else %}
+<p> Chưa có kết quả xét nghiệm </p>
+{% endif %}
+
+{% endblock %}
