@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1> Tất cả bình luận </h1>
+{% for feedback in feedbacks %}
+<small> Người đăng: {{feedback.feedback.username}} </small>
+<p> Nội dung: {{feedback.description}} </p>
+<p> Đánh giá từ 1 đến 5: {{ feedback.rating}} </p>
+<small> {{feedback.time}} </small>
+<hr>
+{% endfor %}
+{% endblock %}

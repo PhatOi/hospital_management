@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thông tin bệnh nhân | Hệ thống quản lý bệnh viện</title>
-    <link rel="stylesheet" href="% static 'css/patient_info.css' %" />
-    <link rel="stylesheet" href="% static 'css/mainpage.css' %" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/patient_info.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mainpage.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -45,27 +45,27 @@
         <ul class="header_navbar_list">
           <li class="header_navbar_item">
             <a
-              href="% url 'Patient__MainPage' %"
+              href="{% url 'Patient__MainPage' %}"
               class="header_navbar_item_link"
               >Trang chính</a
             >
           </li>
           <li class="header_navbar_item">
             <a
-              href="% url 'Patient__Patient_Info' %"
+              href="{% url 'Patient__Patient_Info' %}"
               class="header_navbar_item_link"
               >Thông tin bệnh nhân</a
             >
           </li>
           <li class="header_navbar_item">
             <a
-              href="% url 'Patient__Medical_History' %"
+              href="{% url 'Patient__Medical_History' %}"
               class="header_navbar_item_link"
               >Lịch sử khám bệnh</a
             >
           </li>
           <li class="header_navbar_item">
-            <a href="% url 'Patient__Re_examination' %" 
+            <a href="{% url 'Patient__Re_examination' %}" 
               class="header_navbar_item_link"
             >
               Lịch tái khám

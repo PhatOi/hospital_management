@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -39,8 +40,13 @@ class Medicine(models.Model):
     name = models.CharField(max_length=200)
     numbers = models.PositiveIntegerField()
     expiry = models.DateField()
-    input_day = models.DateField()
-    output_day = models.DateField()
+
+
+class MedicineHistory(models.Model):
+    name = models.CharField(max_length=200)
+    numbers = models.PositiveIntegerField()
+    changeType = models.CharField(max_length=200)
+    date = models.DateTimeField(default=timezone.now)
 
 class MedicalEquipment(models.Model):
     name = models.CharField(max_length=200)
@@ -70,3 +76,12 @@ class Facility(models.Model):
 
     def get_medical_equipments_info(self):
         return self.medical_equipments.all()
+
+    def edit_medicine(self, medicine):
+        pass
+    
+    def edit_medical_equipment(self, equipment):
+        pass
+    
+    def medicine_history(self):
+        pass

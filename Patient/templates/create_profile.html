@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+{% if profile_exists %}
+    <p>Bạn đã tạo hồ sơ. Bạn có thể <a href="{% url 'edit_profile' %}">chỉnh sửa</a> hoặc <a href="{% url 'delete_profile' %}">xóa</a> hồ sơ cũ.</p>
+{% else %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Tạo hồ sơ</button>
+    </form>
+{% endif %}
+
+{% endblock%}
