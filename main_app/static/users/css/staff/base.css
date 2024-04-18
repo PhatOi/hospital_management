@@ -1,0 +1,58 @@
+@media screen and (max-width: 991px) {
+    #sidebar > div {
+        position: unset !important;
+    }
+}
+
+/* ------------------------------------------ */
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ------------------------------------------ */
+body {
+    position: relative;
+}
+
+.w-125 {
+    width: 12.5% !important;
+}
+
+.w-875 {
+    width: 87.5% !important;
+}
+
+/* ------------------------------------------ */
+
+.feedback_form,
+.date_form,
+.action_form,
+.delete_form {
+    display: none;
+    z-index: 5555;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 0;
+    background-color: rgba(0, 0, 0, .3);
+    transition: .3s;
+    animation: fade 1s ease forwards;
+}
+
+.feedback_form-container,
+.date_form-container,
+.action_form-container,
+.delete_form-container {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
+    padding: 0 !important;
+}

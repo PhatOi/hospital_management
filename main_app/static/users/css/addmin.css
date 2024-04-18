@@ -1,0 +1,9 @@
+.mdi-delete {
+    transition: .3s;
+}
+
+.delete_btn:hover .mdi-delete{
+    color: #F95F53;
+    cursor: pointer;
+}
+
