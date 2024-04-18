@@ -1,0 +1,430 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Nhân viên | Danh sách trang thiết bị</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/js/select.dataTables.min.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/vertical-layout-light/style.css' %}">
+  <!-- endinject -->
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/staff/base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/addmin.css' %}">
+  <!--  -->
+
+  <link rel="shortcut icon" href="{% static 'users/images/favicon.png' %}" />
+</head>
+
+<body>
+  <div class="container-scroller"> 
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+        <div class="me-3">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+            <span class="icon-menu"></span>
+          </button>
+        </div>
+        <div>
+          <!-- <a class="navbar-brand brand-logo" href="#">
+            <img src="images/logo.svg" alt="logo" />
+          </a>
+          <a class="navbar-brand brand-logo-mini" href="#">
+            <img src="images/logo-mini.svg" alt="logo" />
+          </a> -->
+        </div>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-top"> 
+        <ul class="navbar-nav">
+          <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="img-xs rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image"> </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+              <div class="dropdown-header text-center">
+                <img class="img-md rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image">
+                <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
+                <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+              </div>
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a> 
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border me-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border me-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div style="position: fixed; top: 97px; left: 0;">
+          <ul class="nav">
+            <li class="nav-item" >
+              <a class="nav-link" href="#">
+                <i class="menu-icon mdi mdi-arrow-up"></i>
+                <span class="menu-title">To top</span>
+              </a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" href="{% url 'healthcareStaff__Homepage' %}">
+                <i class="menu-icon mdi mdi-grid-large"></i>
+                <span class="menu-title">Trang chủ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'healthcareStaff__Infor' %}">
+                <i class="menu-icon mdi mdi-account-card-details"></i>
+                <span class="menu-title">Thông tin cá nhân</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#patient_menu" aria-expanded="false" aria-controls="patient_menu">
+                <i class="menu-icon mdi mdi-account-search"></i>
+                <span class="menu-title">Bệnh nhân đang theo dõi</span>
+                <i class="menu-arrow"></i> 
+              </a>
+              <div class="collapse" id="patient_menu">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Infor' %}">Thông tin bệnh nhân</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_MedicalHistory' %}">Tiền sử bệnh lý</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_TestResult' %}">Kết quả xét nghiệm tổng quát</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Schedule' %}">Lịch trình khám bệnh</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'healthcareStaff__Storage' %}">
+                <i class="menu-icon mdi mdi-screw-machine-round-top"></i>
+                <span class="menu-title">Danh sách trang thiết bị</span>
+              </a>
+            </li>
+            <li class="nav-item feedback">
+              <a class="nav-link" href="#">
+                <i class="menu-icon mdi mdi-comment-processing"></i>
+                <span class="menu-title">Gửi phản hồi</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div id="pillList" class="row">
+            <div class="col-sm-12">
+              <div class="home-tab">
+                <div class="tab-content tab-content-basic">
+                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                    <div class="col-12 grid-margin stretch-card">
+                      <div class="card card-rounded">
+                        <div class="card-body">
+                          <div class="d-sm-flex justify-content-between align-items-start">
+                            <div>
+                              <h4 class="card-title card-title-dash">Danh sách thuốc</h4>
+                            </div>
+                            <div>
+                              <button class="btn btn-action_form btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-pill"></i>Thêm loại thuốc</button>
+                            </div>
+                          </div>
+                          <div class="table-responsive mt-1">
+                            <table class="table select-table">
+                              <thead>
+                                <tr>
+                                  <th>
+      
+                                  </th>
+                                  <th>Loại thuốc</th>
+                                  <th>Tên</th>
+                                  <th>Số lượng</th>
+                                  <th>Hạn sử dụng</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <div class="delete_btn form-check form-check-flat mt-0 h2">
+                                      <i class="mdi mdi-delete" title="Delete"></i>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    Thuốc hạ sốt, kháng viêm
+                                  </td>
+                                  <td>
+                                    Paracetamol (Tylenol, Hapacol, Efferalgant...)
+                                  </td>
+                                  <td>
+                                    255
+                                  </td>
+                                  <td>
+                                    03/05/2025
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <div class="delete_btn form-check form-check-flat mt-0 h2">
+                                      <i class="mdi mdi-delete" title="Delete"></i>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    Thuốc hạ sốt, kháng viêm
+                                  </td>
+                                  <td>
+                                    Ibuprofen, Mobic,…
+                                  </td>
+                                  <td>
+                                    345
+                                  </td>
+                                  <td>
+                                    03/05/2026
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="equipmentList" class="row">
+            <div class="col-sm-12">
+              <div class="home-tab">
+                <div class="tab-content tab-content-basic">
+                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                    <div class="col-12 grid-margin stretch-card">
+                      <div class="card card-rounded">
+                        <div class="card-body">
+                          <div class="d-sm-flex justify-content-between align-items-start">
+                            <div>
+                              <h4 class="card-title card-title-dash">Danh sách thuốc</h4>
+                            </div>
+                            <div>
+                              <button class="btn btn-action_form btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-factory"></i>Thêm thiết bị</button>
+                            </div>
+                          </div>
+                          <div class="table-responsive mt-1">
+                            <table class="table select-table">
+                              <thead>
+                                <tr>
+                                  <th>
+      
+                                  </th>
+                                  <th>Trạng thái</th>
+                                  <th>Tên</th>
+                                  <th>Số lượng</th>
+                                  <th>Hạn sử dụng</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <div class="delete_btn form-check form-check-flat mt-0 h2">
+                                      <i class="mdi mdi-delete" title="Delete"></i>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    Sẵn có
+                                  </td>
+                                  <td>
+                                    Bộ xét nghiệm IVD nồng độ cồn trong máu
+                                  </td>
+                                  <td>
+                                    203
+                                  </td>
+                                  <td>
+                                    03/05/2025
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <div class="delete_btn form-check form-check-flat mt-0 h2">
+                                      <i class="mdi mdi-delete" title="Delete"></i>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    Sẵn có
+                                  </td>
+                                  <td>
+                                    Môi trường nuôi cấy vi khuẩn
+                                  </td>
+                                  <td>
+                                    5
+                                  </td>
+                                  <td>
+                                    03/05/2030
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+
+      
+      <!-- main-panel ends -->
+    </div>
+    
+    
+    
+    <!-- page-body-wrapper ends -->
+  <!-- container-scroller -->
+
+  <div class="container-fluid position-absolute feedback_form">
+    <div class="container feedback_form-container">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Phản hồi với quản trị viên</h4>
+          <form class="forms-sample">
+            <div class="form-group">
+              <label for="name">Họ tên</label>
+              <input type="text" class="form-control" id="feedback_form-name" required autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Ngày/tháng/năm</label>
+              <input type="date" class="form-control" id="feedback_form-date" required>
+            </div>
+            <div class="form-group">
+              <label for="doctor_name">Nghề nghiệp</label>
+              <input type="text" class="form-control" id="feedback_form-job" required autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="content">Nội dung</label>
+              <input type="text" class="form-control" id="feedback_form-content" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-feedback_form-submit btn-submit btn-primary me-2">Submit</button>
+            <button class="btn btn-feedback_form-cancel btn-light">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid position-absolute action_form">
+    <div class="container action_form-container">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title"></h4>
+          <form class="forms-sample">
+            
+            <button type="submit" class="btn btn-action_form-submit btn-submit btn-primary me-2">Submit</button>
+            <button class="btn btn-action_form-cancel btn-light">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid position-absolute delete_form">
+    <div class="container w-50 delete_form-container">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center">Bạn chắc chắn muốn xóa?</h4>
+          <form class="forms-sample text-center">
+            <button type="submit" class="btn btn-delete_form-submit btn-light me-2">Submit</button>
+            <button class="btn btn-delete_form-cancel btn-danger">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- plugins:js -->
+  <script src="{% static 'users/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'users/vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'users/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'users/vendors/progressbar.js/progressbar.min.js' %}"></script>
+
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'users/js/off-canvas.js' %}"></script>
+  <script src="{% static 'users/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'users/js/template.js' %}"></script>
+  <script src="{% static 'users/js/settings.js' %}"></script>
+  <script src="{% static 'users/js/todolist.js' %}"></script>
+  <!-- endinject -->
+  
+  <!-- Custom js for this page-->
+  <script src="{% static 'users/js/dashboard.js' %}"></script>
+  <script src="{% static 'users/js/Chart.roundedBarCharts.js' %}"></script>
+  <!-- End custom js for this page-->
+
+  <script src="{% static 'users/js/staff/medicalExaminationSchedule.js' %}"></script>
+  <script src="{% static 'users/js/admin/admin.js' %}"></script>
+  <script src="{% static 'users/js/staff/base.js' %}"></script>
+
+</body>
+
+</html>
+

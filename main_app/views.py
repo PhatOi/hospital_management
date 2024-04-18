@@ -16,35 +16,31 @@ def main(request):
 
 # HEALTHCARE STAFF
 def healthcareStaff__Homepage(request):
-    template = loader.get_template("HealthcareStaff/homePage.html")
+    template = loader.get_template("Staff/homePage.html")
     return HttpResponse(template.render())    
 
 def healthcareStaff__Infor(request):
-    template = loader.get_template("HealthcareStaff/healthcareStaffInfor.html")
+    template = loader.get_template("Staff/staffInfor.html")
     return HttpResponse(template.render())    
 
-def healthcareStaff__Patient(request):
-    template = loader.get_template("HealthcareStaff/patient.html")
-    return HttpResponse(template.render())   
-
 def healthcareStaff__Patient_Infor(request):
-    template = loader.get_template("HealthcareStaff/patient/infor.html")
+    template = loader.get_template("Staff/pages/patient/infor.html")
     return HttpResponse(template.render())   
 
 def healthcareStaff__Patient_MedicalHistory(request):
-    template = loader.get_template("HealthcareStaff/patient/medicalHistory.html")
+    template = loader.get_template("Staff/pages/patient/medicalHistory.html")
     return HttpResponse(template.render())   
 
 def healthcareStaff__Patient_TestResult(request):
-    template = loader.get_template("HealthcareStaff/patient/testResult.html")
+    template = loader.get_template("Staff/pages/patient/generalTestResults.html")
     return HttpResponse(template.render())   
 
 def healthcareStaff__Patient_Schedule(request):
-    template = loader.get_template("HealthcareStaff/patient/schedule.html")
+    template = loader.get_template("Staff/pages/patient/medicalExaminationSchedule.html")
     return HttpResponse(template.render()) 
   
 def healthcareStaff__Storage(request):
-    template = loader.get_template("HealthcareStaff/storage.html")
+    template = loader.get_template("Staff/medicineFacilities.html")
     return HttpResponse(template.render()) 
 # HEALTHCARE STAFF
 
