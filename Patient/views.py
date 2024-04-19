@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PatientProfileForm, RegisterForm, FeedbackForm 
+from .forms import PatientProfileForm, CustomUserCreationForm, FeedbackForm 
 from django.contrib.auth.models import User 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout 
@@ -11,13 +11,13 @@ from django.http import HttpResponse
 
 def register_view(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('homepage')
     else:
-        form = RegisterForm()
+        form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
 def login_view(request):
