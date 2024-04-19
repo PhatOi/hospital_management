@@ -13,6 +13,26 @@ from .models import Facility, Medicine, MedicalEquipment, MedicineHistory
 def main(request):
     return render(request, 'main.html')  
 
+def home(request):
+    return render(request, 'home.html')
+
+def loginPage(request):
+    return render(request,'login.html')
+
+def signupPage(request):
+    return render(request, 'signup.html')
+
+def forgotPasswordPage(request):
+    return render(request, 'forgotpassword.html')
+
+# ADMIN
+def hospital_admin(request):
+    template = loader.get_template("admin/admin.html")
+    return HttpResponse(template.render())  
+# ADMIN
+
+
+
 # HEALTHCARE STAFF
 def healthcareStaff__Homepage(request):
     template = loader.get_template("Staff/homePage.html")
@@ -42,6 +62,32 @@ def healthcareStaff__Storage(request):
     template = loader.get_template("Staff/medicineFacilities.html")
     return HttpResponse(template.render()) 
 # HEALTHCARE STAFF
+
+
+
+# NEW PATIENT TEMPLATE
+def patient_home(request):
+    template = loader.get_template("newpatient/homePage.html")
+    return HttpResponse(template.render())  
+    
+def patient_infor(request):
+    template = loader.get_template("newpatient/infor.html")
+    return HttpResponse(template.render())  
+
+def patient_medical_history(request):
+    template = loader.get_template("newpatient/medicalHistory.html")
+    return HttpResponse(template.render())  
+
+def patient_test_result(request):
+    template = loader.get_template("newpatient/generalTestResults.html")
+    return HttpResponse(template.render())  
+
+def patient_schedule(request):
+    template = loader.get_template("newpatient/medicalExaminationSchedule.html")
+    return HttpResponse(template.render())  
+# NEW PATIENT TEMPLATE
+
+
 
 # PATIENT
 def Patient__Medical_History(request):

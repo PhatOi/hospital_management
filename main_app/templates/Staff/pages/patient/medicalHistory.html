@@ -25,8 +25,8 @@
   <!-- endinject -->
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'users/css/staff/base.css' %}">
-  <link rel="stylesheet" href="{% static 'users/css/staff/infor.css' %}">
+  <link rel="stylesheet" href="{% static 'users/css/users/base.css' %}">
+  <link rel="stylesheet" href="{% static 'users/css/users/infor.css' %}">
   <!--  -->
 
   <link rel="shortcut icon" href="{% static 'users/images/favicon.png' %}" />
@@ -147,7 +147,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../../medicineFacilities.html">
+              <a class="nav-link" href="{% url 'healthcareStaff__Storage' %}">
                 <i class="menu-icon mdi mdi-screw-machine-round-top"></i>
                 <span class="menu-title">Danh sách trang thiết bị</span>
               </a>
@@ -389,8 +389,8 @@
  <script src="{% static 'users/js/Chart.roundedBarCharts.js' %}"></script>
  <!-- End custom js for this page-->
 
-  <script src="{% static 'users/js/staff/patientInfor.js' %}"></script>
-  <script src="{% static 'users/js/staff/base.js' %}"></script>
+  <script src="{% static 'users/js/users/patientInfor.js' %}"></script>
+  <script src="{% static 'users/js/users/base.js' %}"></script>
 </body>
 
 </html>

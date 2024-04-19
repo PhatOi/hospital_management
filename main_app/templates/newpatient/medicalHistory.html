@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Nhân viên | Thông tin bệnh nhân</title>
+  <title>Nhân viên | Tiền sử bệnh lý</title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -69,10 +69,10 @@
           </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="{% static 'users/images/faces/face2.jpg' %}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image">
+                <img class="img-md rounded-circle" src="{% static 'users/images/faces/face2.jpg' %}" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                 <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
               </div>
@@ -120,36 +120,33 @@
               </a>
             </li>
             <li class="nav-item" >
-              <a class="nav-link" href="{% url 'healthcareStaff__Homepage' %}">
+              <a class="nav-link" href="{% url 'patient_home' %}">
                 <i class="menu-icon mdi mdi-grid-large"></i>
                 <span class="menu-title">Trang chủ</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'healthcareStaff__Infor' %}">
+              <a class="nav-link" href="{% url 'patient_infor' %}">
                 <i class="menu-icon mdi mdi-account-card-details"></i>
                 <span class="menu-title">Thông tin cá nhân</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#patient_menu" aria-expanded="false" aria-controls="patient_menu">
-                <i class="menu-icon mdi mdi-account-search"></i>
-                <span class="menu-title">Bệnh nhân đang theo dõi</span>
-                <i class="menu-arrow"></i> 
+              <a class="nav-link" href="{% url 'patient_medical_history' %}">
+                <i class="menu-icon mdi mdi-folder-account"></i>
+                <span class="menu-title">Tiền sử bệnh lý</span>
               </a>
-              <div class="collapse" id="patient_menu">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Infor' %}">Thông tin bệnh nhân</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_MedicalHistory' %}">Tiền sử bệnh lý</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_TestResult' %}">Kết quả xét nghiệm tổng quát</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Schedule' %}">Lịch trình khám bệnh</a></li>
-                </ul>
-              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'healthcareStaff__Storage' %}">
-                <i class="menu-icon mdi mdi-screw-machine-round-top"></i>
-                <span class="menu-title">Danh sách trang thiết bị</span>
+              <a class="nav-link" href="{% url 'patient_test_result' %}">
+                <i class="menu-icon mdi mdi-library-books"></i>
+                <span class="menu-title">Kết quả xét nghiệm tổng quát</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'patient_schedule' %}">
+                <i class="menu-icon mdi mdi mdi-calendar"></i>
+                <span class="menu-title">Lịch trình khám bệnh</span>
               </a>
             </li>
             <li class="nav-item feedback">
@@ -168,29 +165,23 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Thông tin bệnh nhân đang theo dõi</h4>
+                  <h4 class="card-title">Tiền sử bệnh lý</h4>
                   <form class="form-sample">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <img src="{% static 'users/images/faces/face1.jpg' %}" class="img-fluid mx-auto d-block avatar" alt="avatar">
-                        </div>
-                      </div>
-                    </div>
+                    <p class="card-description">Hành chính</p>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Họ và tên đệm</label>
+                          <label class="col-sm-3 col-form-label">Họ và tên</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Nguyễn Văn" disabled="true"/>
+                            <input type="text" class="form-control input-infor" value="Nguyễn Văn Bé Ba" disabled="true"/>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Tên</label>
+                          <label class="col-sm-3 col-form-label">Ngày sinh</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Bé Ba" disabled="true"/>
+                            <input type="date" class="form-control input-infor" placeholder="dd/mm/yyyy" disabled="true"/>
                           </div>
                         </div>
                       </div>
@@ -209,31 +200,43 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Ngày sinh</label>
-                          <div class="col-sm-9">
-                            <input type="date" class="form-control input-infor" placeholder="dd/mm/yyyy" disabled="true"/>
+                          <label class="col-sm-3 col-form-label">Tình trạng hôn nhân</label>
+                          <div class="col-sm-2">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input input-infor" name="membershipRadios" id="membershipRadios1" value="" checked disabled="true">
+                                Đã kết hôn
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input input-infor" name="membershipRadios" id="membershipRadios1" value=""  disabled="true">
+                                Độc thân
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input input-infor" name="membershipRadios" id="membershipRadios1" value=""  disabled="true">
+                                Đã ly hôn
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input input-infor" name="membershipRadios" id="membershipRadios2" value="option2" disabled="true">
+                                Góa chồng/vợ
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Điện thoại</label>
-                          <div class="col-sm-9">
-                            <input type="tel" class="form-control input-infor" value="0396571234" disabled="true">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Số CCCD</label>
-                          <div class="col-sm-9">
-                            <input type="tel" class="form-control input-infor" value="086204003346" disabled="true"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -260,51 +263,37 @@
                         </div>
                       </div>
                     </div>
+
+                    <p class="card-description">Phẫu thuật</p>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group row">
+                          <label class="w-125 col-sm-2 col-form-label">Liệt kê tất cả các loại phẫu thuật đã thực hiện</label>
+                          <div class="w-875 col-sm-10">
+                            <input type="text" class="form-control input-infor" value="Mỡ trong máu, Huyết áp cao,..." disabled="true">
+                            <!-- <textarea name="text" rows="14" cols="10" wrap="soft"> </textarea> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <p class="card-description">
+                      Tiền sử bệnh
+                    </p>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Bệnh lý</label>
+                          <label class="col-sm-3 col-form-label">Gia đình</label>
                           <div class="col-sm-9">
                             <input type="text" class="form-control input-infor" value="Mỡ trong máu, Huyết áp cao,..." disabled="true">
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <p class="card-description">
-                      Địa chỉ
-                    </p>
-                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Xã, phường, thị trấn</label>
+                          <label class="col-sm-3 col-form-label">Bản thân</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Khu phố 6, Đông Hòa" disabled="true"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Quận, huyện, thị xã</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Dĩ An" disabled="true"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Tỉnh, thành phố</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Bình Dương" disabled="true"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Quốc gia</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control input-infor" value="Việt Nam" disabled="true"/>
+                            <input type="text" class="form-control input-infor" value="Mỡ trong máu, Huyết áp cao,..." disabled="true">
                           </div>
                         </div>
                       </div>

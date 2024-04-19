@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Nhân viên | Lịch trình khám bệnh</title>
+  <title>Trang chủ</title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -25,9 +25,8 @@
   <!-- endinject -->
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'users/css/users/base.css' %}">
-  <link rel="stylesheet" href="{% static 'users/css/users/infor.css' %}">
-  <link rel="stylesheet" href="{% static 'users/css/users/medicalExaminationSchedule.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/users/base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/users/homePage.css' %}">
   <!--  -->
 
   <link rel="shortcut icon" href="{% static 'users/images/favicon.png' %}" />
@@ -43,35 +42,44 @@
             <span class="icon-menu"></span>
           </button>
         </div>
-        <div>
-          <!-- <a class="navbar-brand brand-logo" href="#">
+        <!-- <div>
+          <a class="navbar-brand brand-logo" href="#">
             <img src="images/logo.svg" alt="logo" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="#">
             <img src="images/logo-mini.svg" alt="logo" />
-          </a> -->
-        </div>
+          </a>
+        </div> -->
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+            <h1 class="welcome-text"><span class="text-black fw-bold">Welcome to our hospital management web service</span></h1>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item d-none d-lg-block">
+            <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
+              <span class="input-group-addon input-group-prepend border-right">
+                <span class="icon-calendar input-group-text calendar-icon"></span>
+              </span>
+              <input type="text" class="form-control">
+            </div>
+          </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="{% static 'users/images/faces/profile/guest.png' %}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                <img class="img-xs rounded-circle" src="{% static 'users/images/faces/profile/guest.png' %}" alt="Profile image">
+                <p class="mb-1 mt-3 font-weight-semibold">Guest</p>
+                <p class="fw-light text-muted mb-0"></p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a> 
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a class="dropdown-item" href="{% url 'loginPage' %}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>Login/Sign up</a> 
+              <a class="dropdown-item" href="#"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>FAQ</a>
+              <a class="dropdown-item">
+                <!-- <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out -->
+              </a>
             </div>
           </li>
         </ul>
@@ -107,48 +115,21 @@
         <div style="position: fixed; top: 97px; left: 0;">
           <ul class="nav">
             <li class="nav-item" >
-              <a class="nav-link" href="#">
-                <i class="menu-icon mdi mdi-arrow-up"></i>
-                <span class="menu-title">To top</span>
-              </a>
-            </li>
-            <li class="nav-item" >
-              <a class="nav-link" href="{% url 'healthcareStaff__Homepage' %}">
+              <a class="nav-link" href="{% url 'home' %}">
                 <i class="menu-icon mdi mdi-grid-large"></i>
                 <span class="menu-title">Trang chủ</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'healthcareStaff__Infor' %}">
-                <i class="menu-icon mdi mdi-account-card-details"></i>
-                <span class="menu-title">Thông tin cá nhân</span>
+              <a class="nav-link" href="{% url 'loginPage' %}">
+                <i class="menu-icon mdi mdi-account-outline"></i>
+                <span class="menu-title">Login/Sign up</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#patient_menu" aria-expanded="false" aria-controls="patient_menu">
-                <i class="menu-icon mdi mdi-account-search"></i>
-                <span class="menu-title">Bệnh nhân đang theo dõi</span>
-                <i class="menu-arrow"></i> 
-              </a>
-              <div class="collapse" id="patient_menu">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Infor' %}">Thông tin bệnh nhân</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_MedicalHistory' %}">Tiền sử bệnh lý</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_TestResult' %}">Kết quả xét nghiệm tổng quát</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'healthcareStaff__Patient_Schedule' %}">Lịch trình khám bệnh</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'healthcareStaff__Storage' %}">
-                <i class="menu-icon mdi mdi-screw-machine-round-top"></i>
-                <span class="menu-title">Danh sách trang thiết bị</span>
-              </a>
-            </li>
-            <li class="nav-item feedback">
               <a class="nav-link" href="#">
-                <i class="menu-icon mdi mdi-comment-processing"></i>
-                <span class="menu-title">Gửi phản hồi</span>
+                <i class="menu-icon mdi mdi-help-circle-outline"></i>
+                <span class="menu-title">FAQ</span>
               </a>
             </li>
           </ul>
@@ -157,56 +138,37 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="home-tab">
-                  <div class="card card-rounded">
-                    <div class="card-body">
-                      <div class="d-sm-flex justify-content-between align-items-start">
-                        <div>
-                          <h4 class="card-title">Lịch trình khám bệnh</h4>
-                        </div>
-                        <div>
-                          <button class="btn btn-add-date_form btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-calendar-today"></i>Thêm lịch hẹn</button>
-                        </div>
-                      </div>
-                      <div class="table-responsive mt-1">
-                        <table class="table table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th>Ngày/tháng/năm</th>
-                              <th>Nội dung</th>
-                              <th>Địa điểm</th>
-                              <th>Bác sĩ</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                26/04/2024
-                              </td>
-                              <td>
-                                Khám tổng quát
-                              </td>
-                              <td>
-                                Khoa nội
-                              </td>
-                              <td>
-                                Võ Lê Quang Vinh
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
+          <div class="slide">
+            <div class="slide-container">
+              <div class="slide-item slide-1">
+                <div class="slide-content">
+                  <h2 class="slide-content-header">Why You Should Trust Us? Get Know About Us!</h2>
+                  <div class="silde-content-text">Quality health care - Only Qualified Doctors - Medical Research Professionals</div>
+                </div>
+              </div>
+  
+              <div class="slide-item slide-2">
+                <div class="slide-content">
+                  <h2 class="slide-content-header">Why You Should Trust Us? Get Know About Us!</h2>
+                  <div class="silde-content-text">Quality health care - Only Qualified Doctors - Medical Research Professionals</div>
+                </div>
+              </div>
+  
+              <div class="slide-item slide-3">
+                <div class="slide-content">
+                  <h2 class="slide-content-header">Why You Should Trust Us? Get Know About Us!</h2>
+                  <div class="silde-content-text">Quality health care - Only Qualified Doctors - Medical Research Professionals</div>
+                </div>
               </div>
             </div>
+
+            <div class="bttn bttn-prev"><i class="mdi mdi-arrow-left"></i></div>
+            <div class="bttn bttn-next"><i class="mdi mdi-arrow-right"></i></div>
+
           </div>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
@@ -215,49 +177,9 @@
         </footer>
         <!-- partial -->
       </div>
-
-      
       <!-- main-panel ends -->
     </div>
-    
-    
-    
     <!-- page-body-wrapper ends -->
-    <div class="container-fluid position-absolute date_form">
-      <div class="container date_form-container">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Thêm lịch hẹn</h4>
-            <form class="forms-sample">
-              <div class="form-group">
-                <label for="exampleInputUsername1">Ngày/tháng/năm</label>
-                <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-                  <span class="input-group-addon input-group-prepend border-right">
-                    <span class="icon-calendar input-group-text calendar-icon text-dark"></span>
-                  </span>
-                  <input type="text" class="form-control" id="date_form-date" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="content">Nội dung</label>
-                <input type="text" class="form-control" id="date_form-content" required autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label for="location">Địa điểm</label>
-                <input type="text" class="form-control" id="date_form-location" required autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label for="doctor_name">Bác sĩ</label>
-                <input type="text" class="form-control" id="date_form-name" required autocomplete="off">
-              </div>
-              <button type="submit" class="btn btn-date_form-submit btn-submit btn-primary me-2">Submit</button>
-              <button class="btn btn-date_form-cancel btn-light">Cancel</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container-fluid position-absolute feedback_form">
       <div class="container feedback_form-container">
         <div class="card">
@@ -289,7 +211,7 @@
     </div>
   </div>
   <!-- container-scroller -->
-  
+
   <!-- plugins:js -->
   <script src="{% static 'users/vendors/js/vendor.bundle.base.js' %}"></script>
   <!-- endinject -->
@@ -314,9 +236,8 @@
   <script src="{% static 'users/js/Chart.roundedBarCharts.js' %}"></script>
   <!-- End custom js for this page-->
 
-  <script src="{% static 'users/js/users/medicalExaminationSchedule.js' %}"></script>
+  <script src="{% static 'users/js/users/homePage.js' %}"></script>
   <script src="{% static 'users/js/users/base.js' %}"></script>
-
 </body>
 
 </html>
