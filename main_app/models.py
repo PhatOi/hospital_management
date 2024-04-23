@@ -52,11 +52,13 @@ class MedicalEquipment(models.Model):
     name = models.CharField(max_length=200)
     numbers = models.PositiveIntegerField()
     maintenance_history = models.ManyToManyField('MaintenanceEvent')
-    available = models.BooleanField(default=True)
+    available = models.PositiveIntegerField(default=0)
 
 class MaintenanceEvent(models.Model):
+    name = models.CharField(max_length=255)
     date = models.DateField()
     description = models.TextField()
+    maintenance_count = models.IntegerField()
 
 class Facility(models.Model):
     medicines = models.ManyToManyField(Medicine)
@@ -84,4 +86,10 @@ class Facility(models.Model):
         pass
     
     def medicine_history(self):
+        pass
+    
+    def maintenanceEquip(self):
+        pass
+
+    def maintenanceHistory(self):
         pass

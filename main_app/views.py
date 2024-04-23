@@ -285,3 +285,34 @@ def edit_medical_equipment(request):
 def medicine_history(request):
     history = MedicineHistory.objects.all().order_by('-date')
     return render(request, 'medicine_history.html', {'history': history})
+
+def maintenanceEquip(request):
+    equipment_name = request.POST.get('equipment_name')
+    maintenance_count = int(request.POST.get('maintenance_count'))
+
+    equipment = facility.medical_equipments.get(name=equipment_name)
+
+    if maintenance_count > equipment.available:
+        return render(request, 'edit_medical_equipment.html', {'error_message': 'Số lượng bảo dưỡng không thể lớn hơn số lượng thiết bị hiện có.'})
+
+    if maintenance_count < 0:
+        return render(request, 'edit_medical_equipment.html', {'error_message': 'Số lượng bảo dưỡng không thể là số âm.'})
+
+    equipment.available -= maintenance_count
+    equipment.save()
+
+    maintenance_event = MaintenanceEvent.objects.create(
+        name=f'Bảo dưỡng {equipment.name}',
+            date=datetime.date.today(),
+            description=f'Bảo dưỡng {maintenance_count} {equipment.name}.',
+            maintenance_count=maintenance_count,
+    )
+
+    # Thêm sự kiện bảo dưỡng vào lịch sử bảo dưỡng của thiết bị
+    equipment.maintenance_history.add(maintenance_event)
+
+    return render(request, 'edit_medical_equipment.html', {'success_message': f'Bảo dưỡng {equipment.name} thành công.'})
+
+def maintenanceHistory(request):
+    history = MaintenanceEvent.objects.all().order_by('-date')
+    return render(request, 'maintenance_history.html', {'history': history})
