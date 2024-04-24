@@ -69,10 +69,11 @@ def add_medical_equipment(request):
         try:
             equipment = MedicalEquipment.objects.get(name=equipment_name)
             equipment.numbers += equipment_numbers
+            equipment.available += equipment_numbers
             equipment.save()
             return render(request, 'success.html', {'message': f"Đã thêm {equipment_numbers} thiết bị y tế {equipment_name} vào Facility."})
         except MedicalEquipment.DoesNotExist:
-            new_equipment = MedicalEquipment.objects.create(name=equipment_name, numbers=equipment_numbers)
+            new_equipment = MedicalEquipment.objects.create(name=equipment_name, numbers=equipment_numbers, available=equipment_numbers)
             facility.add_medical_equipment(new_equipment)
             return render(request, 'success.html', {'message': f"Đã thêm thiết bị y tế mới {equipment_name} vào Facility."})
     else:
@@ -138,22 +139,26 @@ def edit_medicine(request):
 def edit_medical_equipment(request):
     if request.method == 'POST':
         equipment_name = request.POST.get('equipment_name')
-        new_numbers = int(request.POST.get('equipment_numbers'))
-        if new_numbers < 0:
+        new_available = int(request.POST.get('equipment_available'))
+        if new_available < 0:
             return render(request, 'error.html', {'message': f"Số lượng thiết bị y tế không thể nhỏ hơn 0."})
         try:
             equipment = MedicalEquipment.objects.get(name=equipment_name)
-            if new_numbers == 0:
-                equipment.delete()
+            if new_available == 0:
+                equipment.numbers = 0
+                equipment.available = 0
+                equipment.save()
                 return render(request, 'success.html', {'message': f"Đã xóa hết thiết bị y tế {equipment_name} khỏi Facility."})
-            elif new_numbers > equipment.numbers:
-                equipment.numbers = new_numbers
+            elif new_available > equipment.available:
+                equipment.numbers += (new_available - equipment.available)
+                equipment.available = new_available
                 equipment.save()
-                return render(request, 'success.html', {'message': f"Đã tăng số lượng thiết bị y tế {equipment_name} lên {new_numbers}."})
+                return render(request, 'success.html', {'message': f"Đã tăng số lượng thiết bị y tế {equipment_name} lên {new_available}."})
             else:
-                equipment.numbers = new_numbers
+                equipment.numbers -= (equipment.available - new_available)
+                equipment.available = new_available
                 equipment.save()
-                return render(request, 'success.html', {'message': f"Đã giảm số lượng thiết bị y tế {equipment_name} xuống {new_numbers}."})
+                return render(request, 'success.html', {'message': f"Đã giảm số lượng thiết bị y tế {equipment_name} xuống {new_available}."})
         except MedicalEquipment.DoesNotExist:
             return render(request, 'error.html', {'message': f"Không tìm thấy thiết bị y tế có tên {equipment_name}."})
     else:
@@ -165,25 +170,30 @@ def medicine_history(request):
 
 def maintenanceEquip(request):
     equipment_name = request.POST.get('equipment_name')
-    maintenance_count = int(request.POST.get('maintenance_count'))
+    new_maintenance_count = int(request.POST.get('maintenance_count'))
 
-    equipment = facility.medical_equipments.get(name=equipment_name)
+    equipment = MedicalEquipment.objects.get(name=equipment_name)
+    old_maintenance_count = equipment.maintenance_history.count()
 
-    if maintenance_count > equipment.available:
-        return render(request, 'edit_medical_equipment.html', {'error_message': 'Số lượng bảo dưỡng không thể lớn hơn số lượng thiết bị hiện có.'})
+    if new_maintenance_count > equipment.available or new_maintenance_count < 0:
+        return render(request, 'edit_medical_equipment.html', {'error_message': 'Số lượng bảo dưỡng không thể lớn hơn số lượng thiết bị hiện có hoặc là số âm.'})
 
-    if maintenance_count < 0:
-        return render(request, 'edit_medical_equipment.html', {'error_message': 'Số lượng bảo dưỡng không thể là số âm.'})
-
-    equipment.available -= maintenance_count
-    equipment.save()
-
-    maintenance_event = MaintenanceEvent.objects.create(
-        name=f'Bảo dưỡng {equipment.name}',
+    if new_maintenance_count > old_maintenance_count:
+        equipment.available -= (new_maintenance_count - old_maintenance_count)
+        maintenance_event = MaintenanceEvent.objects.create(
+            name=f'Bảo dưỡng {equipment.name}',
             date=datetime.date.today(),
-            description=f'Bảo dưỡng {maintenance_count} {equipment.name}.',
-            maintenance_count=maintenance_count,
-    )
+            description=f'Bảo dưỡng thêm {new_maintenance_count - old_maintenance_count} {equipment.name}.',
+            maintenance_count=new_maintenance_count - old_maintenance_count,
+        )
+    elif new_maintenance_count < old_maintenance_count:
+        equipment.available += (old_maintenance_count - new_maintenance_count)
+        maintenance_event = MaintenanceEvent.objects.create(
+            name=f'Bảo dưỡng xong {old_maintenance_count - new_maintenance_count} {equipment.name}',
+            date=datetime.date.today(),
+            description=f'Đã bảo dưỡng xong {old_maintenance_count - new_maintenance_count} {equipment.name}.',
+            maintenance_count=old_maintenance_count - new_maintenance_count,
+        )
 
     # Thêm sự kiện bảo dưỡng vào lịch sử bảo dưỡng của thiết bị
     equipment.maintenance_history.add(maintenance_event)
