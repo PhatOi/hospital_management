@@ -164,31 +164,27 @@ classDiagram
 - ###  Admin Users Can
 1. Manage Healthcare Staff (Add, Update, and Delete)
 2. Manage Patient (Add, Update, and Delete)
-3. Manage Facilities (Add, Update, and Delete)
+3. Manage Facilities Medicine and Medical Equipment (Add, Update, and Delete)
 4. View All Information about Patient, Healthcare Staff
 5. Divide Work for Healthcare Staff
-6. View Chart Analysis about Patient Recovery Progress, Facility Level Use, and Patient Satisfaction Level
-    - Patient Recovery Progress: Percentage chart
-    - Facility Level Use: Bar chart about number of each medicine used and number of times equipment used
-    - Patient Satisfaction Level: Percentage chart
-8. Review and Reply Patient/Healthcare Staff Feedback 
+6. View Overall Chart Analysis about hospital 
+7. Review and Reply Patient/Healthcare Staff Feedback 
 - ###  Healthcare Staff Can
-1. Add/Update their Personal Information
+1. Update their Personal Information
 2. See all about their Patient and Work Duty
 3. Add/Update Patient Personal Information
 4. Add/Update Patient Medical History
 5. Add/Update Patient Test Result
-6. Evaluate Patient Progress
-7. View Patient Treatment Schedule
-8. View Available Facility
-9. Send Feedback to admin
+6. View Patient Treatment Schedule
+7. View Available Facility
+8. Send Feedback to admin
+9. Review and Reply Patient
 - ### Patient Can
-1. Add/Update their Personal Information
+1. Update their Personal Information
 2. View Medical History
 3. View Test Result
 4. View Treatment Schedule
-5. View Healthcare Staff Evaluation
-6. Send Feedback about their satisfaction to admin
+5. Send Feedback about their satisfaction/feedback to admin and staff
 
 ## How to Install and Edit this project?
 
@@ -260,9 +256,75 @@ cd hospital-management
 pip install -r requirements.txt
 ```
 
-**5. Edit some File, Do some Work**
+**5. Add the hosts**
 
-**6. Push to repo by this command line**
+- Got to settings.py file 
+- Then, On allowed hosts, Use **[]** as your host. 
+```python
+ALLOWED_HOSTS = []
+```
+*Do not use the fault allowed settings in this repo. It has security risk!*
+
+
+**6. Now Run Server**
+
+Command for PC:
+```python
+$ python manage.py runserver
+```
+
+Command for Mac:
+```python
+$ python3 manage.py runserver
+```
+
+Command for Linux:
+```python
+$ python3 manage.py runserver
+```
+
+**7. Login Credentials**
+
+Create Super User (Manager/Admin)
+
+Command for PC:
+```
+$  python manage.py createsuperuser
+```
+
+Command for Mac:
+```
+$  python3 manage.py createsuperuser
+```
+
+Command for Linux:
+```
+$  python3 manage.py createsuperuser
+```
+
+
+Then Add Email and Password
+
+**or Use Default Credentials**
+
+*For Admin/Manager*
+Email: admin@admin.com
+Password: hospitaladmin
+
+*For Staff*
+Email: staff@staff.com
+Password: hospitalstaff
+
+*For Patient*
+Email: patient@student.com
+Password: hospitalpatient
+
+
+### Contribute
+
+**1. Edit some File, Do some Work**
+
+**2. Push to repo by this command line**
 
 Add all file changed
 ```
@@ -279,7 +341,7 @@ Push it to repo
 git push
 ```
 
-**7. Resolve Conflict (repo has commits, and local has commit too)**
+**3. Resolve Conflict (repo has commits, and local has commit too)**
 
 Add all file changed
 ```
