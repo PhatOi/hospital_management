@@ -1,0 +1,65 @@
+<h1>Thêm bệnh nhân</h1>
+
+<form action="{% url 'add_patient' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% for field in form  %}
+        <div class="form-group">
+            {{field.errors}}
+            {{field.label_tag}}
+            {{field}}
+        </div>
+        <br>
+    {% endfor %}
+    <button type="submit"> Thêm </button>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>
+
+{% block custom_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const email = document.getElementById('id_email'); 
+        email.addEventListener('keyup', function() {
+            var e = email.value;
+
+            if(e !== ''){
+                fetch('/check_email_exist', {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({email: e}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if(data == "False"){
+                        var span = document.getElementById('email-exist');
+                        if(span !== null){span.remove();}
+                        email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email chưa được sử dụng. </span>");
+                    }else{
+                        var span = document.getElementById('email-exist');
+                        if(span !== null){span.remove();}
+                        email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email đã tồn tại! </span>");                    
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }else{
+                var span = document.getElementById('email-exist');
+                if(span !== null){span.remove();}                
+            }
+        });
+
+    })
+
+</script>
+{% endblock custom_js %}

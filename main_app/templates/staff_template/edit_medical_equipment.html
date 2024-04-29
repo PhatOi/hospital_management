@@ -1,0 +1,21 @@
+<h1>Cập nhật thiết bị y tế | {{ equip.name }}</h1>
+
+<form action="{% url 'staff_edit_medical_equipment' equip_id=equip.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="equipment_name">Tên thiết bị: </label>
+    <input type="text" name="equipment_name" value="{{ equip.name}}"><br><br>
+    <label for="equipment_available">Số lượng có sẵn: </label>
+    <input type="number" name="equipment_available" value="{{ equip.available}}"><br><br>
+    <button type="submit"> Cập nhật </button>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>
+

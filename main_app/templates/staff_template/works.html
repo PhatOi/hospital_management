@@ -1,0 +1,46 @@
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar</title>
+    <style>
+        .day {
+            margin-bottom: 20px;
+        }
+
+        .event {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+<body>
+
+
+<h1> Lịch biểu </h1>
+{% for date, events in event_dict.items %}
+    <div class="day">
+        <h2>{{ date }}</h2>
+        {% for event in events %}
+            <div class="event" id="event_{{ event.id }}">
+                <p><strong>Loại sự kiện:</strong> {{ event.label }}</p>
+                <p id="{{ event.start_date |date:'c'}}"><strong>Ngày bắt đầu:</strong> {{ event.start_date }}</p>
+                <p id="{{ event.end_date |date:'c'}}"><strong>Ngày kết thúc:</strong> {{ event.end_date }}</p>
+                <p id="{{ event.staff.id }}"><strong>Nhân viên:</strong> {{ event.staff }}</p>
+                <p id="{{ event.patient.id }}"><strong>Bệnh nhân:</strong> {{ event.patient }}</p>
+                <p><strong>Phòng:</strong> {{ event.room }}</p>
+                <p><strong>Khoa:</strong> {{ event.facility }}</p>
+                <p type="hidden" id="{{ event.duration }}"></p>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+</body>

@@ -1,0 +1,34 @@
+{% load tz %}
+<h1>Danh sách thiết bị</h1>
+
+<a href="{% url 'manage_equip' %}">Danh sách thiết bị</a> 
+<a href="{% url 'maintenance_history' %}">Lịch sử bảo dưỡng</a>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" or message.tags == "success" %}
+            <p> {{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<table>
+    <tr>
+        <th>Tên thiết bị</th>
+        <th>Số lượng</th>
+        <th>Số lượng có sẵn</th>
+        <th>Thao tác</th>
+    </tr>
+    {% for equip in equipment %}
+    <tr>
+        <td>{{ equip.name }}</td>
+        <td>{{ equip.numbers }}</td>
+        <td>{{ equip.available }}</td>
+        <td><a href="{% url 'edit_medical_equipment' equip_id=equip.id %}">Cập nhật</a>
+            <a href="{% url 'remove_medical_equipment' equip_id=equip.id %}">Xóa</a>
+            <a href="{% url 'maintain_equip' equip_id=equip.id %}">Bảo dưỡng</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+

@@ -1,0 +1,23 @@
+<h1>Cập nhật thuốc | {{ medicine.name }}</h1>
+
+<form action="{% url 'edit_medicine' medicine_id=medicine.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label for="medicine_name">Tên thuốc: </label>
+    <input type="text" placeholder ="Medicine name" name="medicine_name" value="{{ medicine.name }}"><br><br>
+    <label for="medicine_numbers">Số lượng hiện có: </label>
+    <input type="number" placeholder="Quantity" name="medicine_numbers" value="{{ medicine.numbers }}"><br><br>
+    <label for="medicine_expiry">Hạn sử dụng: </label>
+    <input type="date" placeholder="Expiry day" name="medicine_expiry" value="{{ medicine.expiry | date:'Y-d-m' }}"><br><br>
+    <button type="submit"> Cập nhật </button>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>

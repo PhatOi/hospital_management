@@ -1,0 +1,23 @@
+<h1>Thêm thuốc</h1>
+
+<form action="{% url 'staff_add_medicine' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label>Tên thuốc: </label>
+    <input type="text" name="medicine_name"><br><br>
+    <label>Số lượng: </label>
+    <input type="number" name="medicine_numbers"><br><br>
+    <label>Hạn sử dụng: </label>
+    <input type="date" placeholder="Expiry day" name="medicine_expiry"><br><br>
+    <button type="submit"> Thêm </button>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>

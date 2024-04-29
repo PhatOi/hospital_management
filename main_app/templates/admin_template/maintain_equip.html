@@ -1,0 +1,23 @@
+<h1>Bảo dưỡng thiết bị y tế | {{ equip.name }}</h1>
+
+<form action="{% url 'maintain_equip' equip_id=equip.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="equipment_name">Tên thiết bị: </label>
+    <input type="text" name="equipment_name" value="{{ equip.name}}"><br><br>
+    <label for="maintenance_count">Số lượng đang bảo dưỡng: </label>
+    <input type="number" name="maintenance_count" value="{{ n_maintain }}"><br><br>
+    <label for="explain">Giải thích: </label>
+    <input type="text" name="explain"><br><br> 
+    <button type="submit"> Cập nhật </button>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>
+

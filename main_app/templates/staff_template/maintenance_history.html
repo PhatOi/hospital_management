@@ -1,0 +1,28 @@
+{% load tz %}
+<h1>Lịch sử bảo dưỡng</h1>
+
+<a href="{% url 'staff_manage_equip' %}">Danh sách thiết bị</a> 
+<a href="{% url 'view_maintenance_history' %}">Lịch sử bảo dưỡng</a>
+
+<table>
+    <tr>
+        <th>Tên thiết bị</th>
+        <th>Số lượng bảo dưỡng</th>
+        <th>Mô tả</th>
+        <th>Giải thích</th>
+        <th>Ngày bảo dưỡng</th>
+    </tr>
+
+    {% for hist in history %}
+    <tr>
+        <td>{{ hist.name }}</td>
+        <td>{{ hist.maintenance_count }}</td>
+        <td>{{ hist.description }}</td>
+        <td>{{ hist.explain }}</td>
+        <td>{{ hist.date }}</td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+

@@ -1,0 +1,28 @@
+{% load tz %}
+<h1>Lịch Sử Bệnh án | Bệnh nhân: {{ request.user.last_name }} {{ request.user.first_name }} </h1>
+
+
+{% if history %}
+<table>
+    <tr>
+        <th>Ngày khám</th>
+        <th>Chẩn đoán</th>
+        <th>Toa thuốc</th>
+        <th>Số ngày điều trị</th>
+        <th>Khoa điều trị</th>
+        <th>Tiến trình</th>
+    </tr>
+    {% for hist in history %}
+    <tr>
+        <td>{{ hist.date }}</td>
+        <td>{{ hist.diagnosis }}</td>
+        <td>{{ hist.prescription }}</td>
+        <td>{{ hist.treatment_num_days }}</td>
+        <td>{{ hist.medical_department }}</td>
+    </tr>
+
+    {% endfor %}
+</table>
+{% endif %}
+
+

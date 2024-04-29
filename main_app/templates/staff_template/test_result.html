@@ -1,0 +1,24 @@
+<h1>Kết quả xét nghiệm | Bệnh nhân: {{ test_result.patient.admin.last_name }} {{ test_result.patient.admin.first_name }}</h1>
+
+<form action="{% url 'staff_add_test_result' patient_id=test_result.patient.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form  %}
+        <div class="form-group">
+            {{field.errors}}
+            {{field.label_tag}}
+            {{field}}
+        </div>
+        <br>
+    {% endfor %}
+    <button type="submit">Lưu</button>
+    <button><a href="{% url 'staff_manage_patient' %}" style="text-decoration: none; color: inherit;">Trở về</a></button>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</form>

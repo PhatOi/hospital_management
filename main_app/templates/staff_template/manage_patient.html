@@ -1,0 +1,58 @@
+{% load tz %}
+<h1>Danh sách bệnh nhân đang theo dõi </h1>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" or message.tags == "success" %}
+            <p> {{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<table>
+    <tr>
+        <!-- <th>ID</th> -->
+        <th>Ảnh đại diện</th>
+        <th>Họ</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>SĐT</th>
+        <th>Địa chỉ</th>
+        <th>Trạng thái</th>
+        <th>Tiến trình</th>
+        <th>Lần cuối đăng nhập</th>
+        <th>Ngày tham gia</th>
+        <th>Thông tin chi tiết</th>
+        <th>Kết quả xét nghiệm</th>
+        <th>Thông tin bệnh án</th>
+    </tr>
+
+
+    {% for patient, patient_progress in patients %}
+    <tr>
+        <!-- <td>{{ patient.admin.id }}</td> -->
+        <td>
+            {% if patient.avatar == ""  %}
+            No Image
+            {% else %}
+            <img height="100" width="100"
+                src="/media/{{ patient.avatar }}" alt="Avatar">
+            {% endif %}
+        </td>
+        <td>{{ patient.admin.last_name }}</td>
+        <td>{{ patient.admin.first_name }}</td>
+        <td>{{ patient.admin.email }}</td>
+        <td>{{ patient.phone_number }}</td>
+        <td>{{ patient.address }}</td>
+        <td>{{ patient.progress }}</td>
+        <td>{{ patient_progress }} %</td>
+        <td>{{ patient.admin.last_login | timezone:'Asia/Ho_Chi_Minh' }}</td>
+        <td>{{ patient.admin.date_joined | timezone:'Asia/Ho_Chi_Minh' }}</td>
+        <td><a href="{% url 'staff_edit_patient' patient_id=patient.admin.id %}">Xem/Cập nhật</a></td>
+        <td><a href="{% url 'staff_add_test_result' patient_id=patient.id %}">Xem/Cập nhật</a></td>
+        <td><a href="{% url 'staff_add_medical_history' patient_id=patient.id %}">Xem/Thêm</a></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+

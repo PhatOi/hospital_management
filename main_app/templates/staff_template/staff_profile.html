@@ -1,34 +1,37 @@
-<h1>Thêm nhân viên y tế</h1>
+<h1> Nhân viên y tế | {{ request.user.last_name }} {{ request.user.first_name }} </h1>
 
-<form method="post" enctype="multipart/form-data" action="{% url 'add_staff' %}">
+<form method="post" enctype="multipart/form-data" action="{% url 'staff_profile' %}">
     {% csrf_token %}
-
     {% for field in form  %}
         {% if field.label == "Bằng cấp"%}
-        <div class="form-group" id="form_certificates">
-            {{ field.errors }}
-            {{ field.label_tag }}
-            {{ field }}          
-        </div>
-        <button type="button" id="less_more">-</button>
-        <button type="button" id="add_more">+</button><br>
+            <div class="form-group" id="form_certificates">
+                {{ field.errors }}
+                {{ field.label_tag }}</label>
+                {% for name in form.fields.certificate.initial %}
+                    <input type="text" name="certificate" value="{{ name }}"><br>
+                {% endfor %}
+            </div>
+            <button type="button" id="less_more">-</button>
+            <button type="button" id="add_more">+</button><br>
         {% elif field.label == "Khoa chuyên môn (giữ phím ctrl để chọn nhiều hơn một)"%}
-        <div class="form-group">
-            {{ field.errors }}
-            {{ field.label }}     
-            {{ field }}
-        </div>
-        <br>
+            <div class="form-group">
+                {{ field.errors }}
+                {{ field.label_tag }}</label>
+                <select name="specialize" required="" id="id_specialize" multiple="">
+                    {% for facility_id, name in form.fields.specialize.choices %}
+                        <option value="{{ facility_id }}" {% if facility_id in form.fields.specialize.initial %}selected {% endif %}>{{ name }}</option>
+                    {% endfor %}            
+                </select>
+            </div><br>
         {% else %}
-        <div class="form-group">
-            {{field.errors}}
-            {{field.label_tag}}
-            {{field}}
-        </div><br>        
+            <div class="form-group">
+                {{field.errors}}
+                {{field.label_tag}}
+                {{field}}
+            </div><br>        
         {% endif %}
-    {% endfor %}    
-
-    <button type="submit">Thêm</button>
+    {% endfor %}
+    <button type="submit">Lưu</button>
 </form>
 
 {% block custom_js %}
@@ -38,28 +41,30 @@
         var addButton = document.getElementById('add_more');
         var subButton = document.getElementById('less_more');
 
-        var fieldIndex = 1;
     
         addButton.addEventListener('click', function() {
             var newField = document.createElement('div');
             newField.innerHTML = `
-                <input type="text" name="certificate" id="id_certificate_${fieldIndex}">
+                <input type="text" name="certificate" >
             `;
             formFields.appendChild(newField);
-            fieldIndex++;
         });
 
         subButton.addEventListener('click', function() {
-            var lastField = document.getElementById('id_certificate_'+ (fieldIndex-1));
-            lastField.remove();
-            fieldIndex--;
+            var allField = document.querySelectorAll('input[name="certificate"]');
+            var last = allField[allField.length-1];
+            var br = last.previousElementSibling;
+            last.remove();
+            br.remove();
         });
 
         const email = document.getElementById('id_email'); 
+        const initialEmail = email.value;
         email.addEventListener('keyup', function() {
             var e = email.value;
-            if(e !== ''){
-                fetch('/check_email_exist', {
+
+            if(e !== '' && e !== initialEmail){
+                fetch('/staff/check_email_exist', {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
@@ -86,7 +91,6 @@
             }
 
         });
-
     });
 </script>
 {% endblock custom_js %}

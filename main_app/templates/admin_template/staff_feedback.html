@@ -1,0 +1,134 @@
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Management</title>
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+          background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover, .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+  <h1> Phản hồi từ nhân viên</h1>
+  {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == "error" or message.tags == "success" %}
+              <p> {{ message }}</p>
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+  <table>
+    <thead>
+      <tr>
+        <th>
+          STT
+        </th>
+        <th>
+          Nhân viên
+        </th>
+        <th>
+          Nội dung
+        </th>
+        <th>
+          Ngày gửi
+        </th>
+        <th>
+          Ngày trả lời
+        </th>
+        <th>
+          Nội dung trả lời
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for feedback in feedbacks %}
+      <tr>
+        <td class="py-1">{{ forloop.counter }} </td>
+        <td>{{ feedback.staff }}</td>
+        <td>{{ feedback.feedback }}</td>
+        <td>{{feedback.created_at | timezone:'Asia/Ho_Chi_Minh' }}</td>
+        
+        {% if feedback.reply == "" %}
+          <td><span> Đang chờ phản hồi</span></td>
+          <td><button class="modal-trigger" data-target="modal_{{feedback.id}}">Trả lời</button></td>
+        {% else %}
+          <td>{{feedback.updated_at | timezone:'Asia/Ho_Chi_Minh'}}</td>
+          <td>{{feedback.reply}}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+
+  {% for feedback in feedbacks %}
+  <div id="modal_{{feedback.id}}" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Phản hồi nhân viên {{ feedback.staff }} </h2>
+          <form action="{% url 'staff_all_feedback' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ feedback.id }}">
+              <textarea name="reply_message" id="reply_message" cols="30" rows="10" placeholder="Nhập trả lời của bạn..."></textarea>
+              <br>
+              <button type="submit">Gửi</button>
+          </form>
+      </div>
+  </div>
+  {% endfor %}
+
+  {% block custom_js %}
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          var modalTriggers = document.querySelectorAll('.modal-trigger');
+          modalTriggers.forEach(function (trigger) {
+              trigger.addEventListener('click', function () {
+                  var modalId = this.getAttribute('data-target');
+                  var modal = document.getElementById(modalId);
+                  modal.style.display = 'block';
+              });
+          });
+
+          var closeModalButtons = document.querySelectorAll('.close');
+          closeModalButtons.forEach(function (button) {
+              button.addEventListener('click', function () {
+                  var modal = this.closest('.modal');
+                  modal.style.display = 'none';
+              });
+          });
+      });
+  </script>
+  {% endblock custom_js %}
+</body>
+
+
+

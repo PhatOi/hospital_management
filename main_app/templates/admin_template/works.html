@@ -1,0 +1,380 @@
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar</title>
+    <style>
+        .day {
+            margin-bottom: 20px;
+        }
+
+        .event {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .edit-form {
+            margin-top: 10px;
+            display: block;
+        } 
+        
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }        
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+<body>
+
+<button onclick="turnon()">Thêm lịch</button>
+<div id="formmodal" class="modal">
+    <div class="modal-content">
+        <form action="{% url 'add_event' %}" method="post" enctype="multipart/form-data" id="event_form">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.label == "Nhãn" or field.label == "Ngày bắt đầu" or field.label == "Ngày kết thúc" or field.label == 'Phòng' %}
+                <div class="form-group">
+                    {{ field.error }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div><br>
+                {% else %}
+                <div class="form-group" id="field{{ forloop.counter }}" style="display: none;">
+                    {{ field.error }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div><br> 
+                    {% if forloop.counter == 3 %}
+                    <div class="form-group" id="field4" style="display: none;">
+                        <label for="id_staff">Nhân viên y tế:</label>
+                        <select name="staff" id="id_staff">
+                        </select><br>            
+                    </div><br> 
+                    {% endif %}          
+                {% endif %}
+            {% endfor %}
+
+            <input type="hidden" id='duration' value='1' name="id_duration" >
+            <input type="hidden" id='event_id' name='event_id'>
+            <button type="submit" id='form_btn'>Thêm sự kiện</button>
+            <button type="reset" onclick="turnoff()" >Hủy</button>    
+        </form>
+        
+    </div>    
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" or message.tags == "success" %}
+            <p> {{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+<h1> Lịch biểu </h1>
+{% for date, events in event_dict.items %}
+    <div class="day">
+        <h2>{{ date }}</h2>
+        {% for event in events %}
+            <div class="event" id="event_{{ event.id }}">
+                <p><strong>Loại sự kiện:</strong> {{ event.label }}</p>
+                <p id="{{ event.start_date |date:'c'}}"><strong>Ngày bắt đầu:</strong> {{ event.start_date }}</p>
+                <p id="{{ event.end_date |date:'c'}}"><strong>Ngày kết thúc:</strong> {{ event.end_date }}</p>
+                <p id="{{ event.staff.id }}"><strong>Nhân viên:</strong> {{ event.staff }}</p>
+                <p id="{{ event.patient.id }}"><strong>Bệnh nhân:</strong> {{ event.patient }}</p>
+                <p><strong>Phòng:</strong> {{ event.room }}</p>
+                <p><strong>Khoa:</strong> {{ event.facility }}</p>
+                <p type="hidden" id="{{ event.duration }}"></p>
+                <button onclick="editEvent('{{ event.id }}')">Chỉnh sửa</button>
+                <button><a href="{% url 'delete_event' event_id=event.id %}" style="text-decoration: none; color: inherit;">Xóa</a></button>
+                <br><br>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+{% block custom_js %}
+<script>
+    function turnoff(){
+        var modal = document.getElementById('formmodal');
+        modal.style.display = 'none';        
+    }
+
+    function turnon(){
+        const patientField = document.getElementById('field2');
+        const facilityField = document.getElementById('field3');
+        const staffField = document.getElementById('field4');
+        const patientSelect = document.getElementById('id_patient');
+        const startDateField = document.getElementById('id_start_date');
+        const duration = document.getElementById('duration');
+        const endDateField = document.getElementById('id_end_date');
+        
+        startDateField.value = "";
+        endDateField.value = "";
+        duration.value = 1;
+        patientField.style.display = 'none';
+        facilityField.style.display = 'none';
+        staffField.style.display = 'none';
+        patientSelect.disabled = false;
+
+        var modal = document.getElementById('formmodal');
+        modal.style.display = 'block';   
+    }
+
+    function editEvent(eventId) {
+        // event info
+        const event = document.getElementById(`event_${eventId}`);
+        const label = event.querySelector('p:nth-of-type(1)').innerText.split(": ")[1];
+        const start_date = moment(event.querySelector('p:nth-of-type(2)').id).format("YYYY-MM-DDTHH:mm:ss");
+        const end_date = moment(event.querySelector('p:nth-of-type(3)').id).format("YYYY-MM-DDTHH:mm:ss");
+        const staff = event.querySelector('p:nth-of-type(4)');
+        const patient = event.querySelector('p:nth-of-type(5)').id;
+        const room = event.querySelector('p:nth-of-type(6)').innerText.split(": ")[1];
+        const facility = event.querySelector('p:nth-of-type(7)').innerText.split(": ")[1];
+        const duration = event.querySelector('p:nth-of-type(8)').id;
+        const patientSelect = document.getElementById('id_patient');
+        const facilitySelect = document.getElementById('id_facility');  
+        document.getElementById('duration').value = duration; 
+        // populate form
+        document.getElementById('event_form').action = "{% url 'edit_event' %}"
+        document.getElementById('event_id').value = eventId;
+        document.getElementById('id_label').value = label;
+        facilitySelect.value = facility;
+        patientSelect.value = patient;
+        facilitySelect.disabled = false;
+        patientSelect.disabled = true;
+        
+        document.getElementById('id_label').dispatchEvent(new Event('edit'))
+        
+        var option = document.createElement("option");
+        option.text = staff.innerText.split(": ")[1];
+        option.value = staff.id;    
+        setTimeout(() => {
+            document.getElementById("id_staff").appendChild(option);
+            document.getElementById("id_staff").value=staff.id;        
+        }, 400);
+        
+        
+        document.getElementById('id_start_date').value = start_date;
+        document.getElementById('id_end_date').value = end_date;
+        document.getElementById('id_room').value = room;
+        document.getElementById('form_btn').innerText = 'Cập nhật';
+        
+        // some set up display
+        var modal = document.getElementById('formmodal');
+        modal.style.display = 'block';
+        // const form = document.getElementById('event_form');
+        // event.appendChild(form);
+        // form.style.display = 'block';
+
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const labelField = document.getElementById('id_label');
+        const patientField = document.getElementById('field2');
+        const facilityField = document.getElementById('field3');
+        const staffField = document.getElementById('field4');
+        const facilitySelect = document.getElementById('id_facility');  
+        const patientSelect = document.getElementById('id_patient');
+        const startDateField = document.getElementById('id_start_date');
+        const duration = document.getElementById('duration');
+        const endDateField = document.getElementById('id_end_date');
+        const form = document.getElementById('event_form');
+
+        function loadStaff() {
+            const index = facilitySelect.selectedIndex + 1;
+            fetch(`/staff_of_facilities/${index}`)
+            .then(response => response.json())
+            .then(data => {
+                const staff = data;
+                const staffOptions = staff.map(s => `<option value="${s[0]}">${s[1]}</option>`).join('');
+                staffField.innerHTML = `
+                <label for="id_staff">Nhân viên y tế:</label>
+                <select name="staff" class="form-group" required id="id_staff">
+                    ${staffOptions}
+                </select><br>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function medicalInfo() {
+            duration.value = 1;
+            return fetch(`/patient_medical_info/${patientSelect.value}`)
+            .then(response => response.json())
+            .then(data => {
+                facilityField.style.display = 'block';
+                staffField.style.display = 'block';
+                if(data === "False"){                           
+                    facilitySelect.disabled = false;
+                    loadStaff()
+                }else{
+                    duration.value = data[0];
+                    facilitySelect.value = data[1];
+                    facilitySelect.disabled = true;
+                    loadStaff()                            
+                }
+                return; 
+            })
+            .catch(error => {
+                patientField.style.display = 'block';
+                facilityField.style.display = 'none';
+                staffField.style.display = 'none';    
+                console.error('Error:', error)
+            });                        
+
+        }
+
+
+        function updateFieldsVisibility() {
+            const selectedLabel = labelField.value;
+            startDateField.value = "";
+            endDateField.value = "";
+            duration.value = 1;
+            if (selectedLabel === 'Điều trị') {
+                patientSelect.selectedIndex = 0;
+                patientField.style.display = 'block';
+                facilityField.style.display = 'none';
+                staffField.style.display = 'none';
+                patientSelect.addEventListener('change', medicalInfo, true);
+
+            } else if (selectedLabel === 'Cuộc hẹn') {
+                facilitySelect.disabled = false;
+                patientSelect.removeEventListener("change", medicalInfo, true);
+                patientSelect.selectedIndex = 0;
+                patientField.style.display = 'block';
+                facilityField.style.display = 'block';
+                staffField.style.display = 'block';
+                
+                loadStaff()
+
+            } else {
+                patientField.style.display = 'none';
+                facilityField.style.display = 'none';
+                staffField.style.display = 'none';
+            }
+        }
+  
+        labelField.addEventListener('change', updateFieldsVisibility);
+        facilitySelect.addEventListener('change', () => {
+            startDateField.value = "";
+            endDateField.value = "";
+            loadStaff();
+        });
+        labelField.addEventListener('edit', () => {
+            patientField.style.display = 'block';
+            facilityField.style.display = 'block';
+            staffField.style.display = 'block';
+            loadStaff();
+        });
+
+        startDateField.addEventListener('change', function() {
+            var date = new Date(this.valueAsNumber);
+            const durationValue = parseInt(duration.value);
+            if (!isNaN(durationValue)) {
+                date.setDate(date.getDate() + durationValue);
+                endDateField.valueAsNumber = +date;
+            }
+        });
+
+        endDateField.addEventListener('change', function() {
+            var date = new Date(this.valueAsNumber);
+            const durationValue = parseInt(duration.value);
+            var startDate = new Date(startDateField.valueAsNumber);
+            if (!isNaN(durationValue) && !isNaN(startDate)) {
+                var minEndDate = startDate;
+                minEndDate.setDate(minEndDate.getDate() + durationValue);
+                if(date < minEndDate){
+                    endDateField.valueAsNumber = +minEndDate;
+                    alert("Thời gian không được ít hơn quy định");
+                }
+            }
+        });        
+
+        startDateField.addEventListener('change', checkStaffAvailable);
+        endDateField.addEventListener('change', checkStaffAvailable);
+        function checkStaffAvailable(){
+            if(facilityField.style.display === 'none' || staffField.style.display === 'none'){
+                return;
+            }else{
+                var startDate = startDateField.value;
+                var endDate = endDateField.value; 
+                
+                fetch('/check_staff_available', {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({startDate: startDate, endDate: endDate, facility: facilitySelect.selectedIndex + 1}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const staffSelect = document.getElementById('id_staff');
+                    if(Object.keys(data).length === 0){
+                        loadStaff();
+                    }else{
+                        const staff = data;
+                        const staffOptions = staff.map(s => {
+                            if(!!staffSelect.querySelector(`option[value="${s[0]}"]`)){
+                                
+                            }else{
+                                var option = document.createElement("option");
+                                option.text = s[1];
+                                option.value = s[0];
+                                staffSelect.appendChild(option);                                          
+                            }
+                        });
+                    }
+
+
+                })
+            }
+        }
+
+
+
+        form.addEventListener('submit', function(event) {
+            facilitySelect.disabled = false;
+            patientSelect.disabled = false;
+        });        
+
+    });
+</script>
+{% endblock custom_js %}
+
+</body>

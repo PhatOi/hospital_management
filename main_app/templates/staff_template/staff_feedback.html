@@ -1,0 +1,57 @@
+{% load tz %}
+<h1> Thêm phản hồi</h1>
+
+<form action="{% url 'staff_feedback' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form%}
+    <div class="form-group">
+        {{ field.error }}
+        {{ field.label_tag }}
+        {{ field }}        
+    </div><br>
+    {% endfor %}
+    <button type="submit"> Gửi </button>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</form>
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          STT
+        </th>
+        <th>
+          Tin nhắn
+        </th>
+        <th>
+          Ngày gửi
+        </th>
+        <th>
+          Trả lời
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for feedback in feedbacks %}
+      <tr>
+        <td class="py-1">{{ forloop.counter }} </td>
+        <td>{{ feedback.feedback }}</td>
+        <td>{{feedback.created_at | timezone:'Asia/Ho_Chi_Minh'}}</td>
+
+        {% if feedback.reply == "" %}
+            <td><span> Chưa có phản hồi</span></td>
+        {% else %}
+            <td>{{feedback.reply}}</td>
+        {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>

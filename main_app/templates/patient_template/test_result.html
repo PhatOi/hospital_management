@@ -1,0 +1,215 @@
+<h1>Kết quả xét nghiệm | Bệnh nhân: {{ request.user.last_name }} {{ request.user.first_name }}</h1>
+
+
+{% if test_result %}
+<h4>Ngày lấy mẫu: {{ test_result.test_day }} </h4>
+<h4>Chiều cao: {{ test_result.height }} cm</h4> <h4>Cân nặng: {{ test_result.weight }} kg</h4>
+<h4>Huyết áp: {{ test_result.blood_pressure }} mmHg</h4>
+<h4>Nhịp tim: {{ test_result.heart_rate }} nhịp/phút</h4>
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Xét nghiệm
+        </th>
+        <th>
+          Kết quả
+        </th>
+        <th>
+          Trị số bình thường
+        </th>
+        <th>
+          Đơn vị
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="py-1">
+          RBC (Số lượng hồng cầu)
+        </td>
+        <td>
+          {{ test_result.rbc }}
+        </td>
+        <td>
+          4.5 - 5.9
+        </td>
+        <td>
+          T/L
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          HGB (Hemoglobin)
+        </td>
+        <td>
+          {{ test_result.hb }}
+        </td>
+        <td>
+          135 - 175
+        </td>
+        <td>
+          g/L
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          HCT (Hematocrit)
+        </td>
+        <td>
+          {{ test_result.hct }}
+        </td>
+        <td>
+          0.41 - 0.53
+        </td>
+        <td>
+          %
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          PLT (Sô lượng tiểu cầu)
+        </td>
+        <td>
+          {{ test_result.plt }}
+        </td>
+        <td>
+          150 - 400
+        </td>
+        <td>
+          G/L
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          WBC (SỐ lượng bạch cầu)
+        </td>
+        <td>
+          {{ test_result.wbc }}
+        </td>
+        <td>
+          4.0 - 10.0
+        </td>
+        <td>
+          G/L
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          LYM% (Tỷ lệ % BC lympho)
+        </td>
+        <td>
+          {{ test_result.lym }}
+        </td>
+        <td>
+          25 - 45
+        </td>
+        <td>
+          %
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          NEUT% (Tỷ lệ % BC trung tính)
+        </td>
+        <td>
+          {{ test_result.neut }}
+        </td>
+        <td>
+          45 - 75
+        </td>
+        <td>
+          %
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          LEU (Nồng độ bạch cầu trong nước tiểu)
+        </td>
+        <td>
+          {{ test_result.leu }}
+        </td>
+        <td>
+          10.0 - 25.0
+        </td>
+        <td>
+          Leu/UL
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          NIT (Chỉ số nitrit trong nước tiểu)
+        </td>
+        <td>
+          {{ test_result.leu }}
+        </td>
+        <td>
+          0.05 - 0.1
+        </td>
+        <td>
+          mg/dL
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          PRO (Chỉ số protein trong nước tiểu)
+        </td>
+        <td>
+          {{ test_result.pro }}
+        </td>
+        <td>
+          7.5 - 20 
+        </td>
+        <td>
+          mg/dL
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          ERY (Chỉ số hồng cầu trong nước tiểu)
+        </td>
+        <td>
+          {{ test_result.ery }}
+        </td>
+        <td>
+          5 - 10
+        </td>
+        <td>
+          Ery/UL
+        </td>
+      </tr>
+
+      <tr>
+        <td class="py-1">
+          GLU (Chỉ số đường huyết)
+        </td>
+        <td>
+          {{ test_result.glu }}
+        </td>
+        <td>
+          50 - 100
+        </td>
+        <td>
+          mg/dL
+        </td>
+      </tr>      
+
+    </tbody>
+  </table>
+
+<h4>Kết luận: {{ test_result.conclusion }}</h4>  
+{% else %}
+<h3>Chưa có kết quả</h3>
+{% endif %}

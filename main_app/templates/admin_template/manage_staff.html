@@ -1,0 +1,52 @@
+{% load tz %}
+<h1>Danh sách nhân viên</h1>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" or message.tags == "success" %}
+            <p> {{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<table>
+    <tr>
+        <!-- <th>ID</th> -->
+        <th>Ảnh đại diện</th>
+        <th>Họ</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>SĐT</th>
+        <th>Địa chỉ</th>
+        <th>Vai trò</th>
+        <th>Sẵn có</th>
+        <th>Lần cuối đăng nhập</th>
+        <th>Ngày tham gia</th>
+        <th>Thao tác</th>
+    </tr>
+
+    {% for staff in staffs %}
+    <tr>
+        <!-- <td>{{ staff.admin.id }}</td> -->
+        <td>
+            {% if staff.avatar == ""  %}
+            No Image
+            {% else %}
+            <img height="100" width="100"
+                src="/media/{{ staff.avatar }}" alt="Avatar">
+            {% endif %}
+        </td>
+        <td>{{ staff.admin.last_name }}</td>
+        <td>{{ staff.admin.first_name }}</td>
+        <td>{{ staff.admin.email }}</td>
+        <td>{{ staff.phone }}</td>
+        <td>{{ staff.address }}</td>
+        <td>{{ staff.role }}</td>
+        <td>{{ staff.available }}</td>
+        <td>{{ staff.admin.last_login | timezone:'Asia/Ho_Chi_Minh' }}</td>
+        <td>{{ staff.admin.date_joined | timezone:'Asia/Ho_Chi_Minh' }}</td>
+        <td><a href="{% url 'edit_staff' staff_id=staff.admin.id %}">Chi tiết/Cập nhật</a>
+            <a href="{% url 'delete_staff' staff_id=staff.admin.id %}">Xóa</a> 
+        </td>
+    </tr>
+    {% endfor %}
+</table>

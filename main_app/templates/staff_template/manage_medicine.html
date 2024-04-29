@@ -1,0 +1,34 @@
+{% load tz %}
+<h1>Danh sách thuốc</h1>
+
+<a href="{% url 'staff_manage_medicine' %}">Danh sách thuốc</a> 
+<a href="{% url 'view_medicine_history' %}">Lịch sử xuất nhập kho</a>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" or message.tags == "success" %}
+            <p> {{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<table>
+    <tr>
+        <th>Tên thuốc</th>
+        <th>Số lượng</th>
+        <th>Hạn sử dụng</th>
+        <th>Thao tác</th>
+    </tr>
+    {% for medicine in medicines %}
+    <tr>
+        <td>{{ medicine.name }}</td>
+        <td>{{ medicine.numbers }}</td>
+        <td>{{ medicine.expiry }}</td>
+        <td><a href="{% url 'edit_medicine' medicine_id=medicine.id %}">Cập nhật</a>
+            <a href="{% url 'remove_medicine' medicine_id=medicine.id %}">Xóa</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+

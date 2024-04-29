@@ -1,0 +1,52 @@
+{% load tz %}
+<h1>Bệnh án | Bệnh nhân: {{ patient.admin.last_name }} {{ patient.admin.first_name }} </h1>
+
+<form action="{% url 'staff_add_medical_history' patient_id=patient.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form  %}
+        <div class="form-group">
+            {{field.errors}}
+            {{field.label_tag}}
+            {{field}}
+        </div>
+        <br>
+    {% endfor %}
+    <button type="submit">Thêm bệnh án mới</button>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" or message.tags == "success" %}
+                <p> {{ message }}</p>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+</form>
+
+
+
+{% if history %}
+<h3>Lịch sử bệnh án</h3>
+<table>
+    <tr>
+        <th>Ngày khám</th>
+        <th>Chẩn đoán</th>
+        <th>Toa thuốc</th>
+        <th>Số ngày điều trị</th>
+        <th>Khoa điều trị</th>
+    </tr>
+    {% for hist in history %}
+    <tr>
+        <td>{{ hist.date }}</td>
+        <td>{{ hist.diagnosis }}</td>
+        <td>{{ hist.prescription }}</td>
+        <td>{{ hist.treatment_num_days}}</td>
+        <td>{{ hist.medical_department }}</td>
+    </tr>
+
+    {% endfor %}
+</table>
+{% endif %}
+
+
