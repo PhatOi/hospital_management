@@ -124,8 +124,8 @@ urlpatterns = [
     path('staff/manage_equip', healthcareStaff_views.manage_equip, name="staff_manage_equip"),
     path('staff/edit_medical_equipment/<str:equip_id>', healthcareStaff_views.edit_medical_equipment, name="staff_edit_medical_equipment"),
     path('staff/remove_medical_equipment/<str:equip_id>', healthcareStaff_views.remove_medical_equipment, name="staff_remove_medical_equipment"),
-    path('staff/maintenance_history', admin_views.maintenance_history, name="view_maintenance_history"),    
-    path('staff/maintenance/<str:equip_id>', admin_views.maintain_equip, name="staff_maintain_equip"),    
+    path('staff/maintenance_history', healthcareStaff_views.maintenance_history, name="view_maintenance_history"),    
+    path('staff/maintenance/<str:equip_id>', healthcareStaff_views.maintain_equip, name="staff_maintain_equip"),    
 
     path('staff/staff_calendar', healthcareStaff_views.staff_calendar, name="staff_calendar"),
     path('staff/staff_feedback', healthcareStaff_views.staff_feedback, name="staff_feedback"),

@@ -275,13 +275,13 @@ def add_medicine(request):
             medicine.save()
             MedicineHistory.objects.create(name=medicine.name, numbers=medicine_numbers, changeType='Nhập kho')
             messages.success(request, f"Đã thêm {medicine_numbers} thuốc {medicine_name} vào kho.")
-            return HttpResponseRedirect(reverse("add_medicine"))
+            return HttpResponseRedirect(reverse("staff_add_medicine"))
         except Medicine.DoesNotExist:
             new_medicine = Medicine.objects.create(name=medicine_name, numbers=medicine_numbers, expiry=medicine_expiry)
             facility.add_medicine(new_medicine)
             MedicineHistory.objects.create(name=new_medicine.name, numbers=new_medicine.numbers, changeType='Nhập kho')
             messages.success(request, f"Đã thêm thuốc mới {medicine_name} vào kho.")
-            return HttpResponseRedirect(reverse("add_medicine"))           
+            return HttpResponseRedirect(reverse("staff_add_medicine"))           
     else:
         return render(request, 'staff_template/add_medicine.html')
 
@@ -292,7 +292,7 @@ def remove_medicine(request, medicine_id):
     MedicineHistory.objects.create(name=medicine.name, numbers=medicine.numbers, changeType='Xuất kho')
     medicine.delete()
     messages.success(request, f"Đã xóa thuốc {medicine_name} thành công!")    
-    return HttpResponseRedirect(reverse("manage_medicine"))
+    return HttpResponseRedirect(reverse("staff_manage_medicine"))
 
 
 def manage_medicine(request):
@@ -467,7 +467,7 @@ def maintain_equip(request, equip_id):
 
 def maintenance_history(request):
     history = MaintenanceEvent.objects.all().order_by('-date')
-    return render(request, 'admin_template/maintenance_history.html', {'history': history})
+    return render(request, 'staff_template/maintenance_history.html', {'history': history})
 
 
 def staff_feedback(request):

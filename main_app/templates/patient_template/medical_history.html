@@ -1,7 +1,7 @@
 {% load tz %}
 <h1>Lịch Sử Bệnh án | Bệnh nhân: {{ request.user.last_name }} {{ request.user.first_name }} </h1>
 
-
+<p>Tiến trình chung: {{ progress }} % </p>
 {% if history %}
 <table>
     <tr>
@@ -10,7 +10,6 @@
         <th>Toa thuốc</th>
         <th>Số ngày điều trị</th>
         <th>Khoa điều trị</th>
-        <th>Tiến trình</th>
     </tr>
     {% for hist in history %}
     <tr>

@@ -50,7 +50,14 @@ def test_result(request):
 
 def medical_history(request):
     history = MedicalHistory.objects.filter(patient=request.user.patient).order_by('-date')
-    return render(request, 'patient_template/medical_history.html', {'history': history})
+    schedules = TreatmentSchedule.objects.filter(patient=request.user.patient)
+    progress = 0
+    count = 0
+    for schedule in schedules:
+       progress += schedule.get_progress()
+       count += 1 
+    return render(request, 'patient_template/medical_history.html', {'history': history, 'progress': round(progress/count, 2)})
+
 
 
 

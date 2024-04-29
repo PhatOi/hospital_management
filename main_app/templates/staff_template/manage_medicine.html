@@ -23,8 +23,8 @@
         <td>{{ medicine.name }}</td>
         <td>{{ medicine.numbers }}</td>
         <td>{{ medicine.expiry }}</td>
-        <td><a href="{% url 'edit_medicine' medicine_id=medicine.id %}">Cập nhật</a>
-            <a href="{% url 'remove_medicine' medicine_id=medicine.id %}">Xóa</a>
+        <td><a href="{% url 'staff_edit_medicine' medicine_id=medicine.id %}">Cập nhật</a>
+            <a href="{% url 'staff_remove_medicine' medicine_id=medicine.id %}">Xóa</a>
         </td>
     </tr>
 
