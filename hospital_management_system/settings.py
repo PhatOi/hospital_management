@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 
 from pathlib import Path
+from dotenv import load_dotenv
+from google.oauth2 import service_account
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +32,7 @@ SECRET_KEY = 'django-insecure-ccgnk(q5#5(wzw6*-r7%u64mptyl@a0ydrr2d1^0dg3&c8d1&3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,8 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+
+    'phonenumber_field',
+    
     'main_app',
-    'Patient',
+    # 'Patient',
 ]
 
 MIDDLEWARE = [
@@ -51,15 +60,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    # My Middleware
+    'main_app.middleware.LoginCheckMiddleWare',    
 ]
+
 
 ROOT_URLCONF = 'hospital_management_system.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # set template folder
+        'DIRS': ['main_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,6 +100,23 @@ DATABASES = {
     }
 }
 
+# Kết nối với database host
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DBNAME'),
+#         'HOST': os.getenv('DBHOST'),
+#         'USER': os.getenv('DBUSER'),
+#         'PASSWORD': os.getenv('DBPASS'),
+#         'PORT': '5432',
+#         "OPTIONS": {"sslmode": "require"},
+#         'CONN_MAX_AGE': None,
+#     }
+# }
+
+# # Path to Firebase Admin SDK JSON file
+# firebase_credentials_path = os.path.join(BASE_DIR, 'serviceAccountKey.json')
+# firebase_cred = service_account.Credentials.from_service_account_file(firebase_credentials_path)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -110,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
@@ -120,12 +152,49 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'main_app/static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/media')
+
+STORAGES = {
+    
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        ## storage firebase
+        # "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
+        # "OPTIONS": {
+        #     "bucket_name": '',
+        #     "credentials": firebase_cred,
+        #     "default_acl": 'publicRead',
+        # }
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/home/'
+# override the default auth user model
+AUTH_USER_MODEL = "main_app.CustomUser"
+
+# register the authentication function backend
+AUTHENTICATION_BACKENDS = ["main_app.EmailBackEnd.EmailBackEnd"] 
+
+# sent mail local
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "mails-box")
+
+## sent mail with SMTP
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_POST = 587
+
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS=True
+# DEFAULT_FROM_EMAIL = "Hệ thống quản lý bệnh viện"
