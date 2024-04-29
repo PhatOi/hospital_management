@@ -437,11 +437,13 @@ def edit_medicine(request, medicine_id):
     if request.method == 'POST':
         medicine_name = request.POST.get('medicine_name')
         new_numbers = int(request.POST.get('medicine_numbers'))
+        medicine_expiry = request.POST.get('medicine_expiry')
         if new_numbers < 0:
             messages.error(request, f"Số lượng thuốc không thể nhỏ hơn 0.")
             return HttpResponseRedirect(reverse("edit_medicine", kwargs={'medicine_id': medicine_id}))
         try:
             medicine = Medicine.objects.get(name=medicine_name)
+            medicine.expiry = medicine_expiry        
             old_numbers = medicine.numbers
             medicine.numbers = new_numbers
             medicine.save()
