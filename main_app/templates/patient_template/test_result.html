@@ -135,7 +135,7 @@
               >
                 <img
                   class="img-xs rounded-circle"
-                  src="{% static 'users/images/faces/face8.jpg' %}"
+                  src="/media/{{ request.user.patient.avatar }}"
                   alt="Profile image"
                 />
               </a>
@@ -146,7 +146,7 @@
                 <div class="dropdown-header text-center">
                   <img
                     class="img-md rounded-circle"
-                    src="{% static 'users/images/faces/face8.jpg' %}"
+                    src="/media/{{ request.user.patient.avatar }}"
                     alt="Profile image"
                   />
                   <p class="mb-1 mt-3 font-weight-semibold">
@@ -268,7 +268,7 @@
               <h6>Cân nặng: {{ test_result.weight }} kg</h6>
               <h6>Huyết áp: {{ test_result.blood_pressure }} mmHg</h6>
               <h6>Nhịp tim: {{ test_result.heart_rate }} nhịp/phút</h6>
-
+              <br>
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -364,6 +364,7 @@
                   </tr>
                 </tbody>
               </table>
+              <br>
               <h6>Kết luận: {{ test_result.conclusion }}</h6>
               {% else %}
               <h5>Chưa có kết quả</h5>

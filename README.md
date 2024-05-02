@@ -81,6 +81,9 @@ graph TD;
         FFF -->|patient calendar| LLL[patient_calendar]
     end
 ```
+
+You can view more clearly in https://www.mermaidchart.com/raw/0de699b0-df2e-447a-b6e5-0a4ad195f903?theme=light&version=v0.1&format=svg
+
 ## Features of this Project
 
 - ###  Admin Users Can

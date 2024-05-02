@@ -68,10 +68,10 @@
                     </li>
                     <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image"> </a>
+                            <img class="img-xs rounded-circle" src="/media/{{ request.user.patient.avatar }}" alt="Profile image"> </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                                 <div class="dropdown-header text-center">
-                                    <img class="img-md rounded-circle" src="{% static 'users/images/faces/face8.jpg' %}" alt="Profile image">
+                                    <img class="img-md rounded-circle" src="/media/{{ request.user.patient.avatar }}" alt="Profile image">
                                     <p class="mb-1 mt-3 font-weight-semibold">{{ request.user.first_name }}</p>
                                     <p class="fw-light text-muted mb-0">{{ request.user.email }}</p>
                                 </div>
@@ -125,25 +125,25 @@
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'patient_test_result' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-library-books"></i>
                         <span class="menu-title">Kết quả xét nghiệm</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'patient_medical_history' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-folder-account"></i>
                         <span class="menu-title">Thông tin bệnh án</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'patient_calendar' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi mdi-calendar"></i>
                         <span class="menu-title">Lịch trình khám/điều trị bệnh</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'patient_feedback' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-comment-processing"></i>
                         <span class="menu-title">Gửi phản hồi</span>
                     </a>
                     </li>
