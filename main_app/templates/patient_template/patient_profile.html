@@ -137,6 +137,7 @@
                   class="img-xs rounded-circle"
                   src="/media/{{ request.user.patient.avatar }}"
                   alt="Profile image"
+                  style="width: 50%; height: 50%;"
                 />
               </a>
               <div
@@ -270,7 +271,7 @@
                 </div>
                 <br />
                 {% endfor %}
-                <button type="submit">Lưu</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
 
                 {% if messages %} {% for message in messages %}
                 <p>{{ message }}</p>

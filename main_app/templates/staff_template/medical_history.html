@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Trang chủ </title>
+  <title> Thông tin bệnh án </title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -185,7 +185,7 @@
                 <div class="content-wrapper">
 
                     {% load tz %}
-                    <h1>Bệnh án | Bệnh nhân: {{ patient.admin.last_name }} {{ patient.admin.first_name }} </h1>
+                    <h4>Bệnh án | Bệnh nhân: {{ patient.admin.last_name }} {{ patient.admin.first_name }} </h1>
 
                     <form action="{% url 'staff_add_medical_history' patient_id=patient.id %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -241,7 +241,7 @@
                 </div>
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
                     </div>
                 </footer>                
             </div>
