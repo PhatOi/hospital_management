@@ -170,6 +170,7 @@ def add_patient(request):
                 user.patient.relationship = form.cleaned_data.get("relationship") 
                 user.patient.progress = form.cleaned_data.get("progress")
                 user.save()
+                TestResult.objects.get_or_create(patient=user.patient)
                 messages.success(request, "Thêm bệnh nhân thành công")
                 return HttpResponseRedirect(reverse("staff_add_patient"))
             except:
