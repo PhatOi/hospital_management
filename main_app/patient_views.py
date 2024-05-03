@@ -60,7 +60,7 @@ def medical_history(request):
         progress = 0
     else:
         progress = progress / count
-    return render(request, 'patient_template/medical_history.html', {'history': history, 'progress': round(progress/count, 2)})
+    return render(request, 'patient_template/medical_history.html', {'history': history, 'progress': round(progress, 2)})
 
 
 
