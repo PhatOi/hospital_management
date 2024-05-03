@@ -34,9 +34,9 @@
           <div class="col-lg-4  form sign_in-form">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="{% static 'users/images/logo.jpg' %}" alt="logo" style="width: 20%; height: 20%;">
               </div>
-              <h4>Chào mừng bạn trở lại|</h4>
+              <h4>Chào mừng bạn trở lại!</h4>
               <h6 class="fw-light">Hãy đăng nhập để tiếp tục.</h6>
               <form class="pt-3" action="/doLogin" method="post">
                 {% csrf_token %}
