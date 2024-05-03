@@ -197,9 +197,24 @@
                         <p>Status label: {{ status_label }}</p>
                         <p>Data: {{ status_label_count }}</p>
                         <br>                     -->
-                        <canvas id="myChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+
+                        <div class="table-responsive mt-3">
+                            <h3>Bảng thống kê các số lượng</h3>
+                            <table class="table table-bordered">
+                                <tr class="text-center">
+                                    <th>Tổng bệnh nhân</th>
+                                    <th>Tổng số thuốc</th>
+                                    <th>Tổng số thiết bị</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>{{ total_patient }}</td>
+                                    <td>{{ total_medicine }}</td>
+                                    <td>{{ total_equipment }}</td>
+                                </tr>
+                            </table>
+                        </div>
     
-                        <canvas id="rateChart" style="width:100%;max-width:1000px; display: block; margin: 0 auto;"></canvas>
+                        <canvas id="rateChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
     
                         <canvas id="statusChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
                     </div>  
@@ -276,35 +291,6 @@
     </script>
 
     <script>
-
-        var patientNum = Number(document.querySelector('.patient').innerHTML);
-        var medicineNum = Number(document.querySelector('.medicine').innerHTML);
-        var equipmentNum = Number(document.querySelector('.equipment').innerHTML);
-        var xValues = ["Tổng bệnh nhân đang theo dõi", "Tổng số thuốc", "Tổng số thiết bị"];
-        var yValues = [patientNum, medicineNum, equipmentNum];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-            "#2b5797"
-        ];
-
-        new Chart("myChart", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-            }]
-        },
-        options: {
-            title: {
-            display: true,
-            text: "Thống kê các số lượng"
-            }
-        }
-        });
-
         var xRateChartValues = [];
         var rate_labels = document.querySelectorAll('.rate_label');
         rate_labels.forEach(function(item) {
