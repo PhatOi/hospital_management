@@ -223,7 +223,6 @@
                 {% for rate in rate_label %}
                 <p class="rate_label" style="display: none;">{{ rate }}</p>
                 {% endfor %}
-
                 {% for rate in rate_label_count %}
                     <p class="rate_label_count" style="display: none;">{{ rate }}</p>
                 {% endfor %}
@@ -343,7 +342,6 @@
             xStatusChartValues.push (item.innerHTML);
         })
 
-        console.log(status_labels);
 
         var yStatusChartValues = [];
         var status_label_counts = document.querySelectorAll('.status_label_count');
@@ -351,7 +349,7 @@
             yStatusChartValues.push (item.innerHTML);
         })
 
-        console.log(status_label_counts);
+
         var barColors = ["red","blue","orange","brown", "green"];
         
         new Chart("statusChart", {

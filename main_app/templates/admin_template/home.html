@@ -26,7 +26,7 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'users/css/admin/addmin.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/css/users/base.css' %}">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <!--  -->
 
   <link rel="shortcut icon" href="images/favicon.png" />
@@ -125,49 +125,49 @@
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'add_staff' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-account-plus"></i>
                         <span class="menu-title">Thêm nhân viên</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'manage_all_staff' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-format-list-bulleted-type"></i>
                         <span class="menu-title">Danh sách nhân viên</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'add_patient' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-account-multiple-plus"></i>
                         <span class="menu-title">Thêm bệnh nhân</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'manage_all_patient' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-view-list"></i>
                         <span class="menu-title">Danh sách bệnh nhân</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'add_medicine' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-plus-box"></i>
                         <span class="menu-title">Thêm thuốc</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'manage_medicine' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-pill"></i>
                         <span class="menu-title">Quản lý thuốc</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'add_medical_equipment' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-shape-plus"></i>
                         <span class="menu-title">Thêm thiết bị y tế</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'manage_equip' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-factory"></i>
                         <span class="menu-title">Quản lý thiết bị y tế</span>
                     </a>
                     </li>
@@ -179,13 +179,13 @@
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'staff_all_feedback' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-comment-question-outline"></i>
                         <span class="menu-title">Phản hồi từ nhân viên</span>
                     </a>
                     </li>
                     <li class="nav-item" >
                     <a class="nav-link" href="{% url 'patient_all_feedback' %}">
-                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <i class="menu-icon mdi mdi-comment-alert-outline"></i>
                         <span class="menu-title">Phản hồi từ bệnh nhân</span>
                     </a>
                     </li>
@@ -195,28 +195,74 @@
 
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <p>Tổng nhân viên: {{ total_staff }}</p> 
+                    <div class="home-tab">
+                        <canvas id="totalChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+
+                        <canvas id="staffRoleChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+
+                        <canvas id="rateChart" style="width:100%;max-width:1000px; display: block; margin: 0 auto;"></canvas>
+    
+                        <canvas id="statusChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+
+                        <canvas id="joinChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+                    </div>
+                    <!-- <p>Tổng nhân viên: {{ total_staff }}</p> 
                     <p>Tổng bệnh nhân: {{ total_patient }}</p> 
                     <p>Tổng số thuốc: {{ total_medicine }}</p> 
-                    <p>Tổng số thiết bị: {{ total_equipment }}</p> 
-                    <br>
-                    <p>Pie chart cho role sau:</p>
+                    <p>Tổng số thiết bị: {{ total_equipment }}</p>  -->
+                    <p class="staff" style="display: none;">{{ total_staff }}</p>
+                    <p class="patient" style="display: none;">{{ total_patient }}</p>
+                    <p class="medicine" style="display: none;">{{ total_medicine }}</p>
+                    <p class="equipment" style="display: none;">{{ total_equipment }}</p>
+
+                    {% for role in staff_role %}
+                        <p class="staff_role" style="display: none;">{{ role }}</p>
+                    {% endfor %}
+                    {% for role in staff_role_count %}
+                        <p class="staff_role_count" style="display: none;">{{ role }}</p>
+                    {% endfor %}
+                    <!-- <p>Pie chart cho role sau:</p>
                     <p>Label: {{ staff_role }}</p>
-                    <p>Data: {{ staff_role_count }}</p>
-                    <br>
-                    <p>Side Bar chart cho rating sau</p>
+                    <p>Data: {{ staff_role_count }}</p> -->
+                    
+                    <!-- Rate chart values -->
+                    {% for rate in rate_label %}
+                    <p class="rate_label" style="display: none;">{{ rate }}</p>
+                    {% endfor %}
+                    {% for rate in rate_label_count %}
+                        <p class="rate_label_count" style="display: none;">{{ rate }}</p>
+                    {% endfor %}
+                    <!-- <p>Side Bar chart cho rating sau</p>
                     <p>Rate label: {{ rate_label }}</p>
-                    <p>Data: {{ rate_label_count }}</p>
-                    <br>
-                    <p>Bar chart/Donut chart cho trạng thái bệnh nhân</p>
+                    <p>Data: {{ rate_label_count }}</p> -->
+
+
+                    <!-- Status chart values -->
+                    {% for status in status_label %}
+                        <p class="status_label" style="display: none;">{{ status }}</p>
+                    {% endfor %}
+
+                    {% for status in status_label_count %}
+                        <p class="status_label_count" style="display: none;">{{ status }}</p>
+                    {% endfor %}
+                    <!-- <p>Bar chart/Donut chart cho trạng thái bệnh nhân</p>
                     <p>Status label: {{ status_label }}</p>
-                    <p>Data: {{ status_label_count }}</p>
-                    <br>
-                    <p>Line chart cho số bệnh nhân tiếp nhận mỗi tháng</p>
+                    <p>Data: {{ status_label_count }}</p> -->
+
+
+                    {% for join in month_join_label %}
+                        <p class="month_join_label" style="display: none;">{{ join }}</p>
+                    {% endfor %}
+                    {% for join in month_join_number %}
+                        <p class="month_join_number" style="display: none;">{{ join }}</p>
+                    {% endfor %}
+                    <!-- <p>Line chart cho số bệnh nhân tiếp nhận mỗi tháng</p>
                     <p>Month label: {{ month_join_label }}</p>
-                    <p>Month count: {{ month_join_number }}</p>
+                    <p>Month count: {{ month_join_number }}</p> -->
 
                 </div>
+
+                
 
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -229,7 +275,171 @@
 
     </div>
     
-    
+    <script>
+        var staffNum = Number(document.querySelector('.staff').innerHTML);
+        var patientNum = Number(document.querySelector('.patient').innerHTML);
+        var medicineNum = Number(document.querySelector('.medicine').innerHTML);
+        var equipmentNum = Number(document.querySelector('.equipment').innerHTML);
+        var xTotal = ["Tổng số nhân viên", "Tổng bệnh nhân đang theo dõi", "Tổng số thuốc", "Tổng số thiết bị"];
+        var yTotal = [staffNum, patientNum, medicineNum, equipmentNum];
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#1e7145"
+        ];
+
+        new Chart("totalChart", {
+        type: "pie",
+        data: {
+            labels: xTotal,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yTotal
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "Thống kê các số lượng"
+            }
+        }
+        });
+
+        
+        var staff_roles = document.querySelectorAll('.staff_role');
+        var staff_role_counts = document.querySelectorAll('.staff_role_count');
+
+        var xStaffRole = [];
+        var yStaffRole = [];
+
+       staff_roles.forEach(function(item) {
+        xStaffRole.push(item.innerHTML);
+       })
+
+       staff_role_counts.forEach(function(item) {
+        yStaffRole.push(Number(item.innerHTML));
+       })
+
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#1e7145"
+        ];
+
+        new Chart("staffRoleChart", {
+        type: "pie",
+        data: {
+            labels: xStaffRole,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yStaffRole
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "Thống kê số lượng nhân viên"
+            }
+        }
+        });
+
+        var xRateChartValues = [];
+        var rate_labels = document.querySelectorAll('.rate_label');
+        rate_labels.forEach(function(item) {
+            xRateChartValues.push (item.innerHTML);
+        })
+
+        var yRateChartValues = [];
+        var rate_label_counts = document.querySelectorAll('.rate_label_count');
+        rate_label_counts.forEach(function(item) {
+            yRateChartValues.push (item.innerHTML);
+        })
+        var barColors = ["red", "green","blue","orange","brown"];
+        
+        new Chart("rateChart", {
+        type: "bar",
+        data: {
+            labels: xRateChartValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yRateChartValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+            display: true,
+            text: "Đánh giá của bệnh nhân"
+            }
+        }
+        });
+
+        var xStatusChartValues = [];
+        var status_labels = document.querySelectorAll('.status_label');
+        status_labels.forEach(function(item) {
+            xStatusChartValues.push (item.innerHTML);
+        })
+
+        var yStatusChartValues = [];
+        var status_label_counts = document.querySelectorAll('.status_label_count');
+        status_label_counts.forEach(function(item) {
+            yStatusChartValues.push (item.innerHTML);
+        })
+
+        var barColors = ["red","blue","orange","brown", "green"];
+        
+        new Chart("statusChart", {
+        type: "bar",
+        data: {
+            labels: xStatusChartValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yStatusChartValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+            display: true,
+            text: "Tình trạng các bệnh nhân"
+            }
+        }
+        });
+
+        var month_join_labels = document.querySelectorAll('.month_join_label');
+        var month_join_numbers = document.querySelectorAll('.month_join_number')
+        const xJoin = [];
+        const yJoin = [];
+
+        month_join_labels.forEach(function(item) {
+            xJoin.push(Number(item.innerHTML));
+        })
+        month_join_numbers.forEach(function(item) {
+            yJoin.push(Number(item.innerHTML));
+        })
+
+        new Chart("joinChart", {
+        type: "line",
+        data: {
+            labels: xJoin,
+            datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yJoin
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+            yAxes: [{ticks: {min: 0, max:10}}],
+            }
+        }
+        });
+    </script>
     
 
 
