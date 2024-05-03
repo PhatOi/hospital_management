@@ -1,106 +1,334 @@
-<h1> Nhân viên y tế | {{ request.user.last_name }} {{ request.user.first_name }} </h1>
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
 
-<form method="post" enctype="multipart/form-data" action="{% url 'staff_profile' %}">
-    {% csrf_token %}
-    {% for field in form  %}
-        {% if field.label == "Bằng cấp"%}
-            <div class="form-group" id="form_certificates">
-                {{ field.errors }}
-                {{ field.label_tag }}</label>
-                {% for name in form.fields.certificate.initial %}
-                    <input type="text" name="certificate" value="{{ name }}"><br>
-                {% endfor %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> Thông tin cá nhân </title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/typicons/typicons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/simple-line-icons/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/js/select.dataTables.min.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/vertical-layout-light/style.css' %}">
+  <!-- endinject -->
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'users/css/admin/addmin.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/users/base.css' %}">
+
+  <!--  -->
+
+  <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+<body>
+    <div class="container-scroller"> 
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div class="me-3">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+                        <span class="icon-menu"></span>
+                    </button>
+                </div>
+                <div>
+                    <!-- <a class="navbar-brand brand-logo" href="#">
+                        <img src="images/logo.svg" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="#">
+                        <img src="images/logo-mini.svg" alt="logo" />
+                    </a> -->
+                </div>
             </div>
-            <button type="button" id="less_more">-</button>
-            <button type="button" id="add_more">+</button><br>
-        {% elif field.label == "Khoa chuyên môn (giữ phím ctrl để chọn nhiều hơn một)"%}
-            <div class="form-group">
-                {{ field.errors }}
-                {{ field.label_tag }}</label>
-                <select name="specialize" required="" id="id_specialize" multiple="">
-                    {% for facility_id, name in form.fields.specialize.choices %}
-                        <option value="{{ facility_id }}" {% if facility_id in form.fields.specialize.initial %}selected {% endif %}>{{ name }}</option>
-                    {% endfor %}            
-                </select>
-            </div><br>
-        {% else %}
-            <div class="form-group">
-                {{field.errors}}
-                {{field.label_tag}}
-                {{field}}
-            </div><br>        
-        {% endif %}
-    {% endfor %}
-    <button type="submit">Lưu</button>
-</form>
 
-{% block custom_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var formFields = document.getElementById('form_certificates');
-        var addButton = document.getElementById('add_more');
-        var subButton = document.getElementById('less_more');
+            <div class="navbar-menu-wrapper d-flex align-items-top"> 
+                <ul class="navbar-nav">
+                    <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+                        <h1 class="welcome-text"> Xin chào, <span class="text-black fw-bold"> {{ request.user.first_name }} </span></h1>
+                        <h3 class="welcome-sub-text">Hệ thống quản lý bệnh viện với nhiều tính năng vượt trội</h3>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-none d-lg-block">
+                        <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
+                            <span class="input-group-addon input-group-prepend border-right">
+                                <span class="icon-calendar input-group-text calendar-icon"></span>
+                            </span>
+                            <input type="text" class="form-control">
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="img-xs rounded-circle" src="/media/{{ request.user.staff.avatar }}" alt="Profile image"> </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                <div class="dropdown-header text-center">
+                                    <img class="img-md rounded-circle" src="/media/{{ request.user.staff.avatar }}" alt="Profile image">
+                                    <p class="mb-1 mt-3 font-weight-semibold">{{ request.user.first_name }}</p>
+                                    <p class="fw-light text-muted mb-0">{{ request.user.email }}</p>
+                                </div>
+                                <a class="dropdown-item" href="{% url 'staff_profile' %}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2" ></i> Thông tin cá nhân</a> 
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Đăng xuất</a>
+                            </div>
+                        </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+            
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border me-3"></div>Light</div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border me-3"></div>Dark</div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                </div>
+            </div>
 
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <!-- <div style="position: fixed; top: 97px; left: 0;"> -->
+                <ul class="nav">
+                    <li class="nav-item" >
+                    <a class="nav-link" href="#">
+                        <i class="menu-icon mdi mdi-arrow-up"></i>
+                        <span class="menu-title">Lên đầu</span>
+                    </a>
+                    </li>        
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_home' %}">
+                        <i class="menu-icon mdi mdi-grid-large"></i>
+                        <span class="menu-title">Trang chủ</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_add_patient' %}">
+                        <i class="menu-icon mdi mdi-account-plus"></i>
+                        <span class="menu-title">Thêm bệnh nhân</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_manage_patient' %}">
+                        <i class="menu-icon mdi mdi-book-multiple"></i>
+                        <span class="menu-title">Quản lý bệnh nhân</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_add_medicine' %}">
+                        <i class="menu-icon mdi mdi-pill"></i>
+                        <span class="menu-title">Thêm thuốc</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_manage_medicine' %}">
+                        <i class="menu-icon mdi mdi-hospital"></i>
+                        <span class="menu-title">Quản lý thuốc</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_add_medical_equipment' %}">
+                        <i class="menu-icon mdi mdi-library-plus"></i>
+                        <span class="menu-title">Thêm thiết bị y tế</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_manage_equip' %}">
+                        <i class="menu-icon mdi mdi-factory"></i>
+                        <span class="menu-title">Quản lý thiết bị y tế</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_calendar' %}">
+                        <i class="menu-icon mdi mdi-calendar"></i>
+                        <span class="menu-title">Lịch làm việc</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'staff_feedback' %}">
+                        <i class="menu-icon mdi mdi-bookmark-plus"></i>
+                        <span class="menu-title">Gửi phản hồi</span>
+                    </a>
+                    </li>
+                    <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'follow-up_patient_feedback' %}">
+                        <i class="menu-icon mdi mdi-bulletin-board"></i>
+                        <span class="menu-title">Phản hồi từ bệnh nhân</span>
+                    </a>
+                    </li>
+                </ul>
+                <!-- </div> -->
+            </nav>
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+
+                    <h1> Nhân viên y tế | {{ request.user.last_name }} {{ request.user.first_name }} </h1>
+
+                    <form method="post" enctype="multipart/form-data" action="{% url 'staff_profile' %}">
+                        {% csrf_token %}
+                        {% for field in form  %}
+                            {% if field.label == "Bằng cấp"%}
+                                <div class="form-group" id="form_certificates">
+                                    {{ field.errors }}
+                                    {{ field.label_tag }}</label>
+                                    {% for name in form.fields.certificate.initial %}
+                                        <input type="text" name="certificate" value="{{ name }}"><br>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" id="less_more">-</button>
+                                <button type="button" id="add_more">+</button><br>
+                            {% elif field.label == "Khoa chuyên môn (giữ phím ctrl để chọn nhiều hơn một)"%}
+                                <div class="form-group">
+                                    {{ field.errors }}
+                                    {{ field.label_tag }}</label>
+                                    <select name="specialize" required="" id="id_specialize" multiple="">
+                                        {% for facility_id, name in form.fields.specialize.choices %}
+                                            <option value="{{ facility_id }}" {% if facility_id in form.fields.specialize.initial %}selected {% endif %}>{{ name }}</option>
+                                        {% endfor %}            
+                                    </select>
+                                </div><br>
+                            {% else %}
+                                <div class="form-group">
+                                    {{field.errors}}
+                                    {{field.label_tag}}
+                                    {{field}}
+                                </div><br>        
+                            {% endif %}
+                        {% endfor %}
+                        <button class="btn btn-primary" type="submit">Lưu</button>
+                    </form>
+
+                    {% block custom_js %}
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var formFields = document.getElementById('form_certificates');
+                            var addButton = document.getElementById('add_more');
+                            var subButton = document.getElementById('less_more');
+
+                        
+                            addButton.addEventListener('click', function() {
+                                var newField = document.createElement('div');
+                                newField.innerHTML = `
+                                    <input type="text" name="certificate" >
+                                `;
+                                formFields.appendChild(newField);
+                            });
+
+                            subButton.addEventListener('click', function() {
+                                var allField = document.querySelectorAll('input[name="certificate"]');
+                                var last = allField[allField.length-1];
+                                var br = last.previousElementSibling;
+                                last.remove();
+                                br.remove();
+                            });
+
+                            const email = document.getElementById('id_email'); 
+                            const initialEmail = email.value;
+                            email.addEventListener('keyup', function() {
+                                var e = email.value;
+
+                                if(e !== '' && e !== initialEmail){
+                                    fetch('/staff/check_email_exist', {
+                                        method: "POST",
+                                        headers: {
+                                        "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({email: e}),
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log(data);
+                                        if(data == "False"){
+                                            var span = document.getElementById('email-exist');
+                                            if(span !== null){span.remove();}
+                                            email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email chưa được sử dụng. </span>");
+                                        }else{
+                                            var span = document.getElementById('email-exist');
+                                            if(span !== null){span.remove();}
+                                            email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email đã tồn tại! </span>");                    
+                                        }
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                                }else{
+                                    var span = document.getElementById('email-exist');
+                                    if(span !== null){span.remove();}                
+                                }
+
+                            });
+                        });
+                    </script>
+                    {% endblock custom_js %}
+
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == "error" or message.tags == "success" %}
+                                <p> {{ message }}</p>
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endif %}
+  
+
+                </div>
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
+                    </div>
+                </footer>                
+            </div>
+
+        </div>
+
+    </div>
     
-        addButton.addEventListener('click', function() {
-            var newField = document.createElement('div');
-            newField.innerHTML = `
-                <input type="text" name="certificate" >
-            `;
-            formFields.appendChild(newField);
-        });
-
-        subButton.addEventListener('click', function() {
-            var allField = document.querySelectorAll('input[name="certificate"]');
-            var last = allField[allField.length-1];
-            var br = last.previousElementSibling;
-            last.remove();
-            br.remove();
-        });
-
-        const email = document.getElementById('id_email'); 
-        const initialEmail = email.value;
-        email.addEventListener('keyup', function() {
-            var e = email.value;
-
-            if(e !== '' && e !== initialEmail){
-                fetch('/staff/check_email_exist', {
-                    method: "POST",
-                    headers: {
-                    "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({email: e}),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    if(data == "False"){
-                        var span = document.getElementById('email-exist');
-                        if(span !== null){span.remove();}
-                        email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email chưa được sử dụng. </span>");
-                    }else{
-                        var span = document.getElementById('email-exist');
-                        if(span !== null){span.remove();}
-                        email.insertAdjacentHTML('afterend', "<span id='email-exist'> Email đã tồn tại! </span>");                    
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }else{
-                var span = document.getElementById('email-exist');
-                if(span !== null){span.remove();}                
-            }
-
-        });
-    });
-</script>
-{% endblock custom_js %}
+    
+    
 
 
-{% if messages %}
-    {% for message in messages %}
-        {% if message.tags == "error" or message.tags == "success" %}
-            <p> {{ message }}</p>
-        {% endif %}
+    <!-- plugins:js -->
+    <script src="{% static 'users/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
 
-    {% endfor %}
-{% endif %}
+    <!-- Plugin js for this page -->
+    <script src="{% static 'users/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'users/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'users/vendors/progressbar.js/progressbar.min.js' %}"></script>
+
+    <!-- End plugin js for this page -->
+
+    <!-- inject:js -->
+    <script src="{% static 'users/js/off-canvas.js' %}"></script>
+    <script src="{% static 'users/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'users/js/template.js' %}"></script>
+    <script src="{% static 'users/js/settings.js' %}"></script>
+    <!-- endinject -->
+
+    <!-- Custom js for this page-->
+    <script src="{% static 'users/js/dashboard.js' %}"></script>
+    <script src="{% static 'users/js/admin/admin.js' %}"></script>
+    <!-- End custom js for this page-->
+</body>
+</html>

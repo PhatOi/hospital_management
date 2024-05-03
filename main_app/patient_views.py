@@ -56,7 +56,11 @@ def medical_history(request):
     for schedule in schedules:
        progress += schedule.get_progress()
        count += 1 
-    return render(request, 'patient_template/medical_history.html', {'history': history, 'progress': round(progress/count, 2)})
+    if count == 0:
+        progress = 0
+    else:
+        progress = progress / count
+    return render(request, 'patient_template/medical_history.html', {'history': history, 'progress': round(progress, 2)})
 
 
 
