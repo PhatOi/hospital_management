@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Trang chủ </title>
+  <title> Lịch sử bảo dưỡng </title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -200,28 +200,49 @@
 
                     <a class="btn btn-primary" href="{% url 'manage_equip' %}">Trở về danh sách thiết bị</a> 
 
-                    <div class="table-responsive mt-1">
+                    <div id="" class="row">
+                        <div class="col-sm-12">
+                          <div class="home-tab">
+                            <div class="tab-content tab-content-basic">
+                              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                                <div class="col-12 grid-margin stretch-card">
+                                  <div class="card card-rounded">
+                                    <div class="card-body">
+                                      <div class="d-sm-flex flex-column justify-content-between align-items-start">
+                                        <div>
+                                          <h4 class="card-title card-title-dash"></h4>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive mt-1">
 
-                        <table class="table">
-                            <tr>
-                                <th>Tên thiết bị</th>
-                                <th>Số lượng bảo dưỡng</th>
-                                <th>Mô tả</th>
-                                <th>Giải thích</th>
-                                <th>Ngày bảo dưỡng</th>
-                            </tr>
-    
-                            {% for hist in history %}
-                            <tr>
-                                <td>{{ hist.name }}</td>
-                                <td>{{ hist.maintenance_count }}</td>
-                                <td>{{ hist.description }}</td>
-                                <td>{{ hist.explain }}</td>
-                                <td>{{ hist.date }}</td>
-                            </tr>
-    
-                            {% endfor %}
-                        </table>
+                                        <table class="table">
+                                            <tr>
+                                                <th>Tên thiết bị</th>
+                                                <th>Số lượng bảo dưỡng</th>
+                                                <th>Mô tả</th>
+                                                <th>Giải thích</th>
+                                                <th>Ngày bảo dưỡng</th>
+                                            </tr>
+                    
+                                            {% for hist in history %}
+                                            <tr>
+                                                <td>{{ hist.name }}</td>
+                                                <td>{{ hist.maintenance_count }}</td>
+                                                <td>{{ hist.description }}</td>
+                                                <td>{{ hist.explain }}</td>
+                                                <td>{{ hist.date }}</td>
+                                            </tr>
+                    
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     </div>
 
 

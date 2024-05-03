@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Trang chủ </title>
+  <title> Danh sách thuốc </title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -198,6 +198,9 @@
                     {% load tz %}
                     <h1>Danh sách thuốc</h1>
 
+                    
+                    <a class="btn btn-primary" href="{% url 'medicine_history' %}">Lịch sử xuất nhập kho</a>
+
                     <div id="" class="row">
                         <div class="col-sm-12">
                           <div class="home-tab">
@@ -208,13 +211,7 @@
                                     <div class="card-body">
                                       <div class="d-sm-flex flex-column justify-content-between align-items-start">
                                         <div>
-                                          <h4 class="card-title card-title-dash">Danh sách thuốc</h4>
-                                        </div>
-                                        <!-- <div>
-                                            <a href="{% url 'staff_manage_medicine' %}">Danh sách thuốc</a> 
-                                        </div> -->
-                                        <div>
-                                            <a href="{% url 'medicine_history' %}">Lịch sử xuất nhập kho</a>
+                                          <h4 class="card-title card-title-dash"></h4>
                                         </div>
                                       </div>
                                       <div class="table-responsive  mt-1">
@@ -237,15 +234,15 @@
                                                 <td>{{ medicine.name }}</td>
                                                 <td>{{ medicine.numbers }}</td>
                                                 <td>{{ medicine.expiry }}</td>
-                                                <td><a href="{% url 'edit_medicine' medicine_id=medicine.id %}">Cập nhật</a>
-                                                    <a href="{% url 'remove_medicine' medicine_id=medicine.id %}">Xóa</a>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'edit_medicine' medicine_id=medicine.id %}">Cập nhật</a>
+                                                    <a class="btn btn-outline-primary" href="{% url 'remove_medicine' medicine_id=medicine.id %}">Xóa</a>
                                                 </td>
                                             </tr>
-
+                
                                             {% endfor %}
                                         </table>
-
-                                      </div>
+                
+                                    </div>
                                     </div>
                                   </div>
                                 </div>
@@ -254,6 +251,8 @@
                           </div>
                         </div>
                     </div>
+
+                    
                     
 
                 </div>

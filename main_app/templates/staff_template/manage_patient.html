@@ -185,8 +185,9 @@
                 <div class="content-wrapper">
 
                     {% load tz %}
+                    <h1>Danh sách bệnh nhân đang theo dõi</h1>
 
-                    <div id="staffList" class="row">
+                    <div id="" class="row">
                         <div class="col-sm-12">
                           <div class="home-tab">
                             <div class="tab-content tab-content-basic">
@@ -194,13 +195,13 @@
                                 <div class="col-12 grid-margin stretch-card">
                                   <div class="card card-rounded">
                                     <div class="card-body">
-                                      <div class="d-sm-flex justify-content-between align-items-start">
+                                      <div class="d-sm-flex flex-column justify-content-between align-items-start">
                                         <div>
-                                          <h4 class="card-title card-title-dash">Danh sách bệnh nhân đang theo dõi</h4>
+                                          <h4 class="card-title card-title-dash"></h4>
                                         </div>
                                       </div>
                                       <div class="table-responsive mt-1">
-                                        <table class="table select-table">
+                                        <table class="table">
                                           <thead>
                                             <tr>
                                               <th>Ảnh đại diện</th>
@@ -247,9 +248,9 @@
                                                 </td>
                                                 <td>{{ patient.admin.last_login | timezone:'Asia/Ho_Chi_Minh' }}</td>
                                                 <td>{{ patient.admin.date_joined | timezone:'Asia/Ho_Chi_Minh' }}</td>
-                                                <td><a href="{% url 'staff_edit_patient' patient_id=patient.admin.id %}">Xem/Cập nhật</a></td>
-                                                <td><a href="{% url 'staff_add_test_result' patient_id=patient.id %}">Xem/Cập nhật</a></td>
-                                                <td><a href="{% url 'staff_add_medical_history' patient_id=patient.id %}">Xem/Thêm</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'staff_edit_patient' patient_id=patient.admin.id %}">Xem/Cập nhật</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'staff_add_test_result' patient_id=patient.id %}">Xem/Cập nhật</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'staff_add_medical_history' patient_id=patient.id %}">Xem/Thêm</a></td>
                                             </tr>
                                             {% endfor %}
                                           </tbody>
@@ -262,7 +263,9 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                    </div>
+                    
+                                      
 
                 </div>
                 <footer class="footer">

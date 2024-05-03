@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Trang chủ </title>
+  <title> Danh sách thiết bị </title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -209,28 +209,49 @@
                         {% endfor %}
                     {% endif %}
 
-                    <div class="table-responsive mt-1">
-                        <table class="table">
-                            <tr>
-                                <th>Tên thiết bị</th>
-                                <th>Số lượng</th>
-                                <th>Số lượng có sẵn</th>
-                                <th>Thao tác</th>
-                            </tr>
-                            {% for equip in equipment %}
-                            <tr>
-                                <td>{{ equip.name }}</td>
-                                <td>{{ equip.numbers }}</td>
-                                <td>{{ equip.available }}</td>
-                                <td><a class="" href="{% url 'edit_medical_equipment' equip_id=equip.id %}">Cập nhật</a>
-                                    <a class="" href="{% url 'maintain_equip' equip_id=equip.id %}">Bảo dưỡng</a>
-                                    <a class="" href="{% url 'remove_medical_equipment' equip_id=equip.id %}">Xóa</a>
-                                </td>
-                            </tr>
-    
-                            {% endfor %}
-                        </table>
-
+                    <div id="" class="row">
+                        <div class="col-sm-12">
+                          <div class="home-tab">
+                            <div class="tab-content tab-content-basic">
+                              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                                <div class="col-12 grid-margin stretch-card">
+                                  <div class="card card-rounded">
+                                    <div class="card-body">
+                                      <div class="d-sm-flex flex-column justify-content-between align-items-start">
+                                        <div>
+                                          <h4 class="card-title card-title-dash"></h4>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive mt-1">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Tên thiết bị</th>
+                                                <th>Số lượng</th>
+                                                <th>Số lượng có sẵn</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                            {% for equip in equipment %}
+                                            <tr>
+                                                <td>{{ equip.name }}</td>
+                                                <td>{{ equip.numbers }}</td>
+                                                <td>{{ equip.available }}</td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'edit_medical_equipment' equip_id=equip.id %}">Cập nhật</a>
+                                                    <a class="btn btn-outline-warning" href="{% url 'maintain_equip' equip_id=equip.id %}">Bảo dưỡng</a>
+                                                    <a class="btn btn-outline-danger" href="{% url 'remove_medical_equipment' equip_id=equip.id %}">Xóa</a>
+                                                </td>
+                                            </tr>
+                    
+                                            {% endfor %}
+                                        </table>
+                
+                                    </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     </div>
 
 

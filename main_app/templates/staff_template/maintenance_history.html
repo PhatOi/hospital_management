@@ -187,29 +187,52 @@
                     {% load tz %}
                     <h4>Lịch sử bảo dưỡng</h4>
 
-                    <a href="{% url 'staff_manage_equip' %}">Danh sách thiết bị</a> 
+                    <a class="btn btn-primary" href="{% url 'staff_manage_equip' %}">Danh sách thiết bị</a> 
                     <!-- <a href="{% url 'view_maintenance_history' %}">Lịch sử bảo dưỡng</a> -->
 
-                    <table>
-                        <tr>
-                            <th>Tên thiết bị</th>
-                            <th>Số lượng bảo dưỡng</th>
-                            <th>Mô tả</th>
-                            <th>Giải thích</th>
-                            <th>Ngày bảo dưỡng</th>
-                        </tr>
-
-                        {% for hist in history %}
-                        <tr>
-                            <td>{{ hist.name }}</td>
-                            <td>{{ hist.maintenance_count }}</td>
-                            <td>{{ hist.description }}</td>
-                            <td>{{ hist.explain }}</td>
-                            <td>{{ hist.date }}</td>
-                        </tr>
-
-                        {% endfor %}
-                    </table>
+                    <div id="" class="row">
+                        <div class="col-sm-12">
+                          <div class="home-tab">
+                            <div class="tab-content tab-content-basic">
+                              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                                <div class="col-12 grid-margin stretch-card">
+                                  <div class="card card-rounded">
+                                    <div class="card-body">
+                                      <div class="d-sm-flex flex-column justify-content-between align-items-start">
+                                        <div>
+                                          <h4 class="card-title card-title-dash"></h4>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive mt-1">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Tên thiết bị</th>
+                                                <th>Số lượng bảo dưỡng</th>
+                                                <th>Mô tả</th>
+                                                <th>Giải thích</th>
+                                                <th>Ngày bảo dưỡng</th>
+                                            </tr>
+                    
+                                            {% for hist in history %}
+                                            <tr>
+                                                <td>{{ hist.name }}</td>
+                                                <td>{{ hist.maintenance_count }}</td>
+                                                <td>{{ hist.description }}</td>
+                                                <td>{{ hist.explain }}</td>
+                                                <td>{{ hist.date }}</td>
+                                            </tr>
+                    
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
 
 
        

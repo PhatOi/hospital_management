@@ -194,6 +194,8 @@
                         {% endfor %}
                     {% endif %}
 
+                    <h1>Danh sách thuốc</h1>
+                    <a class="btn btn-primary" href="{% url 'view_medicine_history' %}">Lịch sử xuất nhập kho</a>
                     <div id="" class="row">
                         <div class="col-sm-12">
                           <div class="home-tab">
@@ -204,14 +206,11 @@
                                     <div class="card-body">
                                       <div class="d-sm-flex flex-column justify-content-between align-items-start">
                                         <div>
-                                          <h4 class="card-title card-title-dash">Danh sách thuốc</h4>
+                                          <h4 class="card-title card-title-dash"></h4>
                                         </div>
                                         <!-- <div>
                                             <a href="{% url 'staff_manage_medicine' %}">Danh sách thuốc</a> 
                                         </div> -->
-                                        <div>
-                                            <a href="{% url 'view_medicine_history' %}">Lịch sử xuất nhập kho</a>
-                                        </div>
                                       </div>
                                       <div class="table-responsive  mt-1">
                                         <table class="table select-table">

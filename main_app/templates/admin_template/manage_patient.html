@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Trang chủ </title>
+  <title> Danh sách bệnh nhân </title>
   <!-- plugins:css -->
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/feather/feather.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'users/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -205,66 +205,89 @@
                         {% endfor %}
                     {% endif %}
 
-                    <div class="table-responsvie mt-1">
-                        <table class="table">
-                            <tr>
-                                <!-- <th>ID</th> -->
-                                <th>Ảnh đại diện</th>
-                                <th>Họ</th>
-                                <th>Tên</th>
-                                <th>Email</th>
-                                <th>SĐT</th>
-                                <th>Địa chỉ</th>
-                                <th>Trạng thái</th>
-                                <th>Tiến trình</th>
-                                <th>Lần cuối đăng nhập</th>
-                                <th>Ngày tạo tài khoản</th>
-                                <th>Thông tin chi tiết</th>
-                                <th>Kết quả xét nghiệm</th>
-                                <th>Thông tin bệnh án</th>
-                                <th>Thao tác</th>
-                            </tr>
-    
-    
-                            {% for patient, patient_progress in patients %}
-                            <tr>
-                                <!-- <td>{{ patient.admin.id }}</td> -->
-                                <td>
-                                    {% if patient.avatar == ""  %}
-                                    No Image
-                                    {% else %}
-                                    <img height="100" width="100"
-                                        src="/media/{{ patient.avatar }}" alt="Avatar">
-                                    {% endif %}
-                                </td>
-                                <td>{{ patient.admin.last_name }}</td>
-                                <td>{{ patient.admin.first_name }}</td>
-                                <td>{{ patient.admin.email }}</td>
-                                <td>{{ patient.phone_number }}</td>
-                                <td>{{ patient.address }}</td>
-                                <td>{{ patient.progress }}</td>
-                                <td>
-                                    <div>
-                                        <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                          <p class="text-success">{{ patient_progress }}%</p>
-                                        </div>
-                                        <div class="progress progress-md">
-                                          <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="" class="row">
+                        <div class="col-sm-12">
+                          <div class="home-tab">
+                            <div class="tab-content tab-content-basic">
+                              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                                <div class="col-12 grid-margin stretch-card">
+                                  <div class="card card-rounded">
+                                    <div class="card-body">
+                                      <div class="d-sm-flex flex-column justify-content-between align-items-start">
+                                        <div>
+                                          <h4 class="card-title card-title-dash"></h4>
                                         </div>
                                       </div>
-                                </td>
-                                <td>{{ patient.admin.last_login | timezone:'Asia/Ho_Chi_Minh' }}</td>
-                                <td>{{ patient.admin.date_joined | timezone:'Asia/Ho_Chi_Minh' }}</td>
-                                <td><a href="{% url 'edit_patient' patient_id=patient.admin.id %}">Xem/Cập nhật</a></td>
-                                <td><a href="{% url 'test_result' patient_id=patient.id %}">Xem/Cập nhật</a></td>
-                                <td><a href="{% url 'medical_history' patient_id=patient.id %}">Xem/Thêm</a></td>
-                                <td><a href="{% url 'delete_patient' patient_id=patient.admin.id %}">Xóa</a></td>
-    
-                            </tr>
-                            {% endfor %}
-                        </table>
-
+                                      <div class="table-responsvie mt-1" style="overflow-x: auto;">
+                                        <table class="table">
+                                            <tr>
+                                                <!-- <th>ID</th> -->
+                                                <th>Ảnh đại diện</th>
+                                                <th>Họ</th>
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>SĐT</th>
+                                                <th>Địa chỉ</th>
+                                                <th>Trạng thái</th>
+                                                <th>Tiến trình</th>
+                                                <th>Lần cuối đăng nhập</th>
+                                                <th>Ngày tạo tài khoản</th>
+                                                <th>Thông tin chi tiết</th>
+                                                <th>Kết quả xét nghiệm</th>
+                                                <th>Thông tin bệnh án</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                    
+                    
+                                            {% for patient, patient_progress in patients %}
+                                            <tr>
+                                                <!-- <td>{{ patient.admin.id }}</td> -->
+                                                <td>
+                                                    {% if patient.avatar == ""  %}
+                                                    No Image
+                                                    {% else %}
+                                                    <img height="100" width="100"
+                                                        src="/media/{{ patient.avatar }}" alt="Avatar">
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ patient.admin.last_name }}</td>
+                                                <td>{{ patient.admin.first_name }}</td>
+                                                <td>{{ patient.admin.email }}</td>
+                                                <td>{{ patient.phone_number }}</td>
+                                                <td>{{ patient.address }}</td>
+                                                <td>{{ patient.progress }}</td>
+                                                <td>
+                                                    <div>
+                                                        <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                          <p class="text-success">{{ patient_progress }}%</p>
+                                                        </div>
+                                                        <div class="progress progress-md">
+                                                          <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                      </div>
+                                                </td>
+                                                <td>{{ patient.admin.last_login | timezone:'Asia/Ho_Chi_Minh' }}</td>
+                                                <td>{{ patient.admin.date_joined | timezone:'Asia/Ho_Chi_Minh' }}</td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'edit_patient' patient_id=patient.admin.id %}">Xem/Cập nhật</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'test_result' patient_id=patient.id %}">Xem/Cập nhật</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'medical_history' patient_id=patient.id %}">Xem/Thêm</a></td>
+                                                <td><a class="btn btn-outline-danger" href="{% url 'delete_patient' patient_id=patient.admin.id %}">Xóa</a></td>
+                    
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     </div>
+                    
+                    
 
 
 
