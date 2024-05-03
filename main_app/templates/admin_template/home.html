@@ -197,7 +197,28 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="home-tab">
-                        <canvas id="totalChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
+                        <div class="table-responsive mt-1">
+                            <h3>Bảng thống kê các số lượng</h3>
+                            <table class="table table-bordered">
+                                <tr class="text-center">
+                                    <th>Tổng nhân viên</th>
+                                    <th>Tổng bệnh nhân</th>
+                                    <th>Tổng số thuốc</th>
+                                    <th>Tổng số thiết bị</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>{{ total_staff }}</td>
+                                    <td>{{ total_patient }}</td>
+                                    <td>{{ total_medicine }}</td>
+                                    <td>{{ total_equipment }}</td>
+                                </tr>
+                            </table>
+                        </div>
+<!-- 
+                        <p >Tổng nhân viên: {{ total_staff }}</p> 
+                        <p>Tổng bệnh nhân: {{ total_patient }}</p> 
+                        <p>Tổng số thuốc: {{ total_medicine }}</p> 
+                        <p>Tổng số thiết bị: {{ total_equipment }}</p>  -->
 
                         <canvas id="staffRoleChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
 
@@ -207,10 +228,6 @@
 
                         <canvas id="joinChart" style="width:100%;max-width:1000px; display: block; margin: 32px auto;"></canvas>
                     </div>
-                    <!-- <p>Tổng nhân viên: {{ total_staff }}</p> 
-                    <p>Tổng bệnh nhân: {{ total_patient }}</p> 
-                    <p>Tổng số thuốc: {{ total_medicine }}</p> 
-                    <p>Tổng số thiết bị: {{ total_equipment }}</p>  -->
                     <p class="staff" style="display: none;">{{ total_staff }}</p>
                     <p class="patient" style="display: none;">{{ total_patient }}</p>
                     <p class="medicine" style="display: none;">{{ total_medicine }}</p>
@@ -277,37 +294,6 @@
     </div>
     
     <script>
-        var staffNum = Number(document.querySelector('.staff').innerHTML);
-        var patientNum = Number(document.querySelector('.patient').innerHTML);
-        var medicineNum = Number(document.querySelector('.medicine').innerHTML);
-        var equipmentNum = Number(document.querySelector('.equipment').innerHTML);
-        var xTotal = ["Tổng số nhân viên", "Tổng bệnh nhân đang theo dõi", "Tổng số thuốc", "Tổng số thiết bị"];
-        var yTotal = [staffNum, patientNum, medicineNum, equipmentNum];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-            "#2b5797",
-            "#1e7145"
-        ];
-
-        new Chart("totalChart", {
-        type: "pie",
-        data: {
-            labels: xTotal,
-            datasets: [{
-            backgroundColor: barColors,
-            data: yTotal
-            }]
-        },
-        options: {
-            title: {
-            display: true,
-            text: "Thống kê các số lượng"
-            }
-        }
-        });
-
-        
         var staff_roles = document.querySelectorAll('.staff_role');
         var staff_role_counts = document.querySelectorAll('.staff_role_count');
 
