@@ -342,7 +342,7 @@ Push it to repo
 git push
 ```
 
-**3. Resolve Conflict (repo has commits, and local has commit too)**
+<!-- **3. Resolve Conflict (repo has commits, and local has commit too)**
 
 Add all file changed
 ```
@@ -380,5 +380,5 @@ git add .
 git commit -m "add story"
 git pull
 git push
-```
+``` -->
 
