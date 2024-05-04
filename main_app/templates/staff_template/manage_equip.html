@@ -188,6 +188,13 @@
 
                     <h1>Danh sách thiết bị</h1>
                     <a class="btn btn-primary" href="{% url 'view_maintenance_history' %}">Lịch sử bảo dưỡng</a>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == "error" or message.tags == "success" %}
+                                <p> {{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     <div id="" class="row">
                         <div class="col-sm-12">
                           <div class="home-tab">

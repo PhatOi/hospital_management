@@ -205,7 +205,7 @@
                         <label for="medicine_numbers">Số lượng hiện có: </label>
                         <input type="number" placeholder="Quantity" name="medicine_numbers" value="{{ medicine.numbers }}"><br><br>
                         <label for="medicine_expiry">Hạn sử dụng: </label>
-                        <input type="date" placeholder="Expiry day" name="medicine_expiry" value="{{ medicine.expiry | date:'Y-d-m' }}"><br><br>
+                        <input type="date" placeholder="Expiry day" name="medicine_expiry" value="{{ medicine.expiry | date:'Y-m-d' }}"><br><br>
                         <button class="btn btn-success" type="submit"> Cập nhật </button>
                         <a class="btn btn-secondary" href="{% url 'manage_medicine' %}">Trở về danh sách thuốc</a> 
 
