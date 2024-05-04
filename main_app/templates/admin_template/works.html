@@ -374,10 +374,11 @@
                             var option = document.createElement("option");
                             option.text = staff.innerText.split(": ")[1];
                             option.value = staff.id;    
-                            setTimeout(() => {
-                                document.getElementById("id_staff").appendChild(option);
-                                document.getElementById("id_staff").value=staff.id;        
-                            }, 400);
+                            // setTimeout(() => {
+                            document.getElementById("id_staff").innerText = '';
+                            document.getElementById("id_staff").appendChild(option);
+                            document.getElementById("id_staff").value=staff.id;        
+                            // }, 400);
                             
                             
                             document.getElementById('id_start_date').value = start_date;
@@ -433,12 +434,12 @@
                                     staffField.style.display = 'block';
                                     if(data === "False"){                           
                                         facilitySelect.disabled = false;
-                                        loadStaff()
+                                        // loadStaff()
                                     }else{
                                         duration.value = data[0];
                                         facilitySelect.value = data[1];
                                         facilitySelect.disabled = true;
-                                        loadStaff()                            
+                                        // loadStaff()                            
                                     }
                                     return; 
                                 })
@@ -457,6 +458,8 @@
                                 startDateField.value = "";
                                 endDateField.value = "";
                                 duration.value = 1;
+                                const staffSelect = document.getElementById('id_staff');
+                                staffSelect.innerText = '';
                                 if (selectedLabel === 'Điều trị') {
                                     patientSelect.selectedIndex = 0;
                                     patientField.style.display = 'block';
@@ -472,7 +475,7 @@
                                     facilityField.style.display = 'block';
                                     staffField.style.display = 'block';
                                     
-                                    loadStaff()
+                                    // loadStaff()
 
                                 } else {
                                     patientField.style.display = 'none';
@@ -485,13 +488,15 @@
                             facilitySelect.addEventListener('change', () => {
                                 startDateField.value = "";
                                 endDateField.value = "";
-                                loadStaff();
+                                const staffSelect = document.getElementById('id_staff');
+                                staffSelect.innerText = '';
+                                // loadStaff();
                             });
                             labelField.addEventListener('edit', () => {
                                 patientField.style.display = 'block';
                                 facilityField.style.display = 'block';
                                 staffField.style.display = 'block';
-                                loadStaff();
+                                // loadStaff();
                             });
 
                             startDateField.addEventListener('change', function() {
@@ -536,10 +541,12 @@
                                     .then(response => response.json())
                                     .then(data => {
                                         const staffSelect = document.getElementById('id_staff');
+                                        staffSelect.innerText = '';
                                         if(Object.keys(data).length === 0){
-                                            loadStaff();
+                                            // loadStaff();
                                         }else{
-                                            const staff = data;
+                                            // if(staffSelect.innerHTML.trim() !== ''){
+                                            const staff = data;    
                                             const staffOptions = staff.map(s => {
                                                 if(!!staffSelect.querySelector(`option[value="${s[0]}"]`)){
                                                     

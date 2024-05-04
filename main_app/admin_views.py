@@ -732,7 +732,7 @@ def check_staff_available(request):
     facility_name = body['facility']
 
     staff_names = []
-    staffs = Staff.objects.filter(specialize=facility_name, available=False)
+    staffs = Staff.objects.filter(specialize=facility_name)
     for staff in staffs:
         overlap_schedules = TreatmentSchedule.objects.filter(
             staff=staff,
