@@ -233,15 +233,15 @@ Then Add Email and Password
 **or Use Default Credentials**
 
 *For Admin/Manager*
-Email: admin@admin.com
-Password: hospitaladmin
+Email: admin@gmail.com
+Password: hospitalmanager
 
 *For Staff*
-Email: staff@staff.com
+Email: staff@gmail.com
 Password: hospitalstaff
 
 *For Patient*
-Email: patient@student.com
+Email: patient@gmail.com
 Password: hospitalpatient
 
 
